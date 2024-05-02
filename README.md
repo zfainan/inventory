@@ -1,0 +1,6 @@
+- Install composer dependensi: composer install
+- Install javascript dependensi: npm install
+- Create database: php artisan migrate
+- Seed data (create dummy data): php artisan db:seed
+- Run development server: php artisan serve
+- Run javascript: npm run dev
