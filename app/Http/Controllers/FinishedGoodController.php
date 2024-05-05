@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Buku;
 use App\Models\DetailSpk;
 use App\Models\Spk;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class FinishedGoodController extends Controller
      */
     public function index()
     {
-        $data = DetailSpk::latest()->paginate();
+        $data = Buku::latest()->paginate();
 
         return view('finished-good.index', [
             'data' => $data
@@ -66,9 +67,14 @@ class FinishedGoodController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(DetailSpk $detailSpk)
+    public function show(Buku $buku)
     {
-        //
+        $data = DetailSpk::with('spk')->where('id_buku', $buku->id)->latest()->paginate();
+
+        return view('finished-good.show', [
+            'data' => $data,
+            'buku' => $buku,
+        ]);
     }
 
     /**

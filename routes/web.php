@@ -29,7 +29,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('distributor', DistributorController::class);
 
-    Route::resource('finished-goods', FinishedGoodController::class);
+    Route::resource('finished-goods', FinishedGoodController::class)
+        ->except(['show']);
 
     Route::resource('surat-jalan', SuratJalanController::class);
 
@@ -49,6 +50,9 @@ Route::middleware('auth')->group(function () {
         ->parameters([
             'ukuran-kertas' => 'ukuran_kertas'
         ]);
+
+    Route::get('finished-goods/{buku}', [FinishedGoodController::class, 'show'])
+        ->name('finished-goods.show');
 });
 
 

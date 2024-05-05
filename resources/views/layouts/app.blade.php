@@ -109,38 +109,44 @@
                     <!-- sidebar -->
                     <nav class="sidebar sidebar-offcanvas py-3" id="sidebar" aria-label="sidebar">
                         <ul class="nav">
-                            <li class="nav-item">
+                            <li class="nav-item {{ Str::startsWith(url()->current(), route('home')) ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ route('home') }}">
                                     <i class="mdi mdi-grid-large menu-icon"></i>
                                     <span class="menu-title">Dashboard</span>
                                 </a>
                             </li>
 
-                            <li class="nav-item">
+                            <li
+                                class="nav-item {{ Str::startsWith(url()->current(), route('spk.index')) ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ route('spk.index') }}">
                                     <i class="mdi mdi-file-document menu-icon"></i>
                                     <span class="menu-title">SPK</span>
                                 </a>
                             </li>
 
-                            <li class="nav-item">
+                            <li
+                                class="nav-item {{ Str::startsWith(url()->current(), route('finished-goods.index')) ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ route('finished-goods.index') }}">
                                     <i class="mdi mdi-clipboard-check menu-icon"></i>
                                     <span class="menu-title">Finished Goods</span>
                                 </a>
                             </li>
 
-                            <li class="nav-item">
+                            <li
+                                class="nav-item {{ Str::startsWith(url()->current(), route('surat-jalan.index')) ? 'active' : '' }}">
                                 <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
                                     aria-controls="ui-basic">
                                     <i class="menu-icon mdi mdi-floor-plan"></i>
                                     <span class="menu-title">Documents</span>
                                     <i class="menu-arrow"></i>
                                 </a>
-                                <div class="collapse" id="ui-basic">
+                                <div class="collapse  {{ Str::startsWith(url()->current(), route('surat-jalan.index')) ? 'show' : '' }}"
+                                    id="ui-basic">
                                     <ul class="nav flex-column sub-menu">
-                                        <li class="nav-item"> <a class="nav-link"
-                                                href="{{ route('surat-jalan.index') }}">Surat Jalan</a></li>
+                                        <li
+                                            class="nav-item  {{ Str::startsWith(url()->current(), route('surat-jalan.index')) ? 'active' : '' }}">
+                                            <a class="nav-link" href="{{ route('surat-jalan.index') }}">Surat Jalan</a>
+                                        </li>
                                         <li class="nav-item"> <a class="nav-link" href="#">Nota Perbaikan</a></li>
                                     </ul>
                                 </div>
@@ -148,63 +154,72 @@
 
                             <li class="nav-item nav-category">Master Data</li>
 
-                            <li class="nav-item">
+                            <li
+                                class="nav-item {{ Str::startsWith(url()->current(), route('penerbit.index')) ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ route('penerbit.index') }}">
                                     <i class="mdi mdi-book-open-page-variant menu-icon"></i>
                                     <span class="menu-title">Penerbit</span>
                                 </a>
                             </li>
 
-                            <li class="nav-item">
+                            <li
+                                class="nav-item {{ Str::startsWith(url()->current(), route('buku.index')) ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ route('buku.index') }}">
                                     <i class="mdi mdi-book menu-icon"></i>
                                     <span class="menu-title">Buku</span>
                                 </a>
                             </li>
 
-                            <li class="nav-item">
+                            <li
+                                class="nav-item {{ Str::startsWith(url()->current(), route('distributor.index')) ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ route('distributor.index') }}">
                                     <i class="mdi mdi-store menu-icon"></i>
                                     <span class="menu-title">Distributor</span>
                                 </a>
                             </li>
 
-                            <li class="nav-item">
+                            <li
+                                class="nav-item {{ Str::startsWith(url()->current(), route('ukuran-buku.index')) ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ route('ukuran-buku.index') }}">
                                     <i class="mdi mdi-ruler menu-icon"></i>
                                     <span class="menu-title">Ukuran Buku</span>
                                 </a>
                             </li>
 
-                            <li class="nav-item">
+                            <li
+                                class="nav-item {{ Str::startsWith(url()->current(), route('grammatur.index')) ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ route('grammatur.index') }}">
                                     <i class="mdi mdi-decagram menu-icon"></i>
                                     <span class="menu-title">Grammatur</span>
                                 </a>
                             </li>
 
-                            <li class="nav-item">
+                            <li
+                                class="nav-item {{ Str::startsWith(url()->current(), route('cetak-isi.index')) ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ route('cetak-isi.index') }}">
                                     <i class="mdi mdi-image-filter-black-white menu-icon"></i>
                                     <span class="menu-title">Cetak Isi</span>
                                 </a>
                             </li>
 
-                            <li class="nav-item">
+                            <li
+                                class="nav-item {{ Str::startsWith(url()->current(), route('kertas-isi.index')) ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ route('kertas-isi.index') }}">
                                     <i class="mdi mdi-newspaper menu-icon"></i>
                                     <span class="menu-title">Kertas Isi</span>
                                 </a>
                             </li>
 
-                            <li class="nav-item">
+                            <li
+                                class="nav-item {{ Str::startsWith(url()->current(), route('finishing.index')) ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ route('finishing.index') }}">
                                     <i class="mdi mdi-format-color-fill menu-icon"></i>
                                     <span class="menu-title">Finishing</span>
                                 </a>
                             </li>
 
-                            <li class="nav-item">
+                            <li
+                                class="nav-item {{ Str::startsWith(url()->current(), route('ukuran-kertas.index')) ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ route('ukuran-kertas.index') }}">
                                     <i class="mdi mdi-format-size menu-icon"></i>
                                     <span class="menu-title">Ukuran Kertas</span>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2 class="h4">Hasil Cetak</h2>
+    <h2 class="h4">Hasil Cetak Buku {{ $buku->judul }}</h2>
 
     <div class="d-flex">
         <div class="ms-auto">
@@ -20,22 +20,18 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Judul Buku</th>
-                <th scope="col">Aksi</th>
+                <th scope="col">No. SPK</th>
+                <th scope="col">Tanggal</th>
+                <th scope="col">Qty</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($data as $buku)
+            @foreach ($data as $fg)
                 <tr>
                     <th scope="row">{{ $loop->iteration }}</th>
-                    <td>{{ $buku->judul }}</td>
-                    <td>
-                        <a href="{{ route('finished-goods.show', $buku) }}">
-                            <button class="badge rounded border-0" title="detail">
-                                <i class="text-info h4 mdi mdi-eye-outline menu-icon"></i>
-                            </button>
-                        </a>
-                    </td>
+                    <td>{{ $fg->spk->nomor_spk }}</td>
+                    <td>{{ $fg->tanggal }}</td>
+                    <td>{{ $fg->qty }}</td>
                 </tr>
             @endforeach
         </tbody>
