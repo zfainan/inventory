@@ -71,13 +71,13 @@
                                 <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                     {{ Auth::user()->name }}
-                                    <img class="img-xs rounded-circle ms-3" src="/assets/images/faces/face8.jpg" alt=""
-                                        alt="Profile image"> </a>
+                                    <img class="img-xs rounded-circle ms-3" src="/assets/images/faces/face8.jpg"
+                                        alt="" alt="Profile image"> </a>
                                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
                                     aria-labelledby="UserDropdown">
                                     <div class="dropdown-header text-center">
-                                        <img class="img-md rounded-circle" src="/assets/images/faces/face8.jpg" alt=""
-                                            alt="Menu profile image">
+                                        <img class="img-md rounded-circle" src="/assets/images/faces/face8.jpg"
+                                            alt="" alt="Menu profile image">
                                         <p class="mb-1 mt-3 fw-semibold">{{ Auth::user()->name }}</p>
                                         <p class="fw-light text-muted mb-0">{{ Auth::user()->email }}</p>
                                     </div>
@@ -141,8 +141,7 @@
                                     <ul class="nav flex-column sub-menu">
                                         <li class="nav-item"> <a class="nav-link"
                                                 href="{{ route('surat-jalan.index') }}">Surat Jalan</a></li>
-                                        <li class="nav-item"> <a class="nav-link"
-                                                href="#">Nota Perbaikan</a></li>
+                                        <li class="nav-item"> <a class="nav-link" href="#">Nota Perbaikan</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -172,8 +171,36 @@
 
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('grammatur.index') }}">
-                                    <i class="mdi mdi-decagram-outline menu-icon"></i>
+                                    <i class="mdi mdi-decagram menu-icon"></i>
                                     <span class="menu-title">Grammatur</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('cetak-isi.index') }}">
+                                    <i class="mdi mdi-image-filter-black-white menu-icon"></i>
+                                    <span class="menu-title">Cetak Isi</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('kertas-isi.index') }}">
+                                    <i class="mdi mdi-newspaper menu-icon"></i>
+                                    <span class="menu-title">Kertas Isi</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('finishing.index') }}">
+                                    <i class="mdi mdi-format-color-fill menu-icon"></i>
+                                    <span class="menu-title">Finishing</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('ukuran-kertas.index') }}">
+                                    <i class="mdi mdi-format-size menu-icon"></i>
+                                    <span class="menu-title">Ukuran Kertas</span>
                                 </a>
                             </li>
 
