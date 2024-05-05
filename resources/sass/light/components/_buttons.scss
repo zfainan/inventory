@@ -13,7 +13,7 @@
   }
   &.btn-sm {
     font-size: $btn-font-size-sm;
-    border-radius:15px; 
+    border-radius:15px;
   }
   &.btn-lg {
     font-size: $btn-font-size-lg;
@@ -80,16 +80,16 @@
 }
 /*social buttons*/
 @each $color, $value in $theme-colors {
-  .btn-#{$color} { 
+  .btn-#{"" + $color} {
     @include button-variant($value);
   }
-  .btn-outline-#{$color} {
+  .btn-outline-#{"" + $color} {
     @include button-outline-variant($value);
   }
 }
 
 @each $color, $value in $social-colors {
-  .btn-#{$color} { 
+  .btn-#{$color} {
     @include social-button($value);
   }
   .btn-outline-#{$color} {
@@ -98,7 +98,7 @@
 }
 /* inverse buttons */
 @each $color, $value in $theme-colors {
-  .btn-inverse-#{$color} {
+  .btn-inverse-#{"" + $color} {
     @include button-inverse-variant($value);
   }
 }

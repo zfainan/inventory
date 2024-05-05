@@ -94,7 +94,7 @@ address {
 
 //blockqoute color variations
 @each $color, $value in $theme-colors {
-  .blockquote-#{$color} {
+  .blockquote-#{"" + $color} {
     @include blockquote($value);
   }
 }

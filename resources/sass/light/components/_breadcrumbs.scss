@@ -25,7 +25,7 @@
       &:first-child {
         padding-left: 1rem;
       }
-      &:before{ 
+      &:before{
         content: "";
         padding-right: 0;
       }
@@ -68,7 +68,7 @@
         padding-right: 0;
       }
     }
-    
+
   }
 
   &.bg-success,&.bg-dark,&.bg-danger,&.bg-warning,&.bg-primary,&.bg-info{
@@ -88,7 +88,7 @@
 
 /* inverse breadcrumb */
 @each $color, $value in $theme-colors {
-  .bg-inverse-#{$color} {
+  .bg-inverse-#{"" + $color} {
     @include breadcrumb-inverse-variant($value);
   }
 }

@@ -34,18 +34,18 @@ code {
   display: flex;
 }
 @each $color, $value in $theme-colors-purple {
-  .background-#{$color} {
-    @include background-variations($value); 
+  .background-#{"" + $color} {
+    @include background-variations($value);
   }
-} 
+}
 @each $color, $value in $theme-colors-hr {
-  .bg-#{$color} {
-    @include background-variations-hr($value); 
+  .bg-#{"" + $color} {
+    @include background-variations-hr($value);
   }
-} 
+}
 
 @each $color, $value in $theme-colors-sale {
-  .text-#{$color} {
-    @include background-variations-sale($value); 
+  .text-#{"" + $color} {
+    @include background-variations-sale($value);
   }
-} 
+}

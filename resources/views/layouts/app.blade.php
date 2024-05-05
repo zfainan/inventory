@@ -110,7 +110,7 @@
                     <nav class="sidebar sidebar-offcanvas py-3" id="sidebar" aria-label="sidebar">
                         <ul class="nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="index.html">
+                                <a class="nav-link" href="{{ route('home') }}">
                                     <i class="mdi mdi-grid-large menu-icon"></i>
                                     <span class="menu-title">Dashboard</span>
                                 </a>

@@ -10,7 +10,7 @@
   }
 }
 @each $color, $value in $theme-colors {
-  .bg-opacity-#{$color} {
+  .bg-opacity-#{"" + $color} {
     background: rgba($value, .12);
     padding: 20px;
     border-radius: 14px;
@@ -30,7 +30,7 @@
   }
 }
 @each $color, $value in $theme-colors {
-  .payment-circle-#{$color} {
+  .payment-circle-#{"" + $color} {
     width: 8px;
     height: 8px;
     border: 3px solid $value;

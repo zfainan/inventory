@@ -43,7 +43,7 @@ select {
     }
 
     @each $color, $value in $theme-colors {
-      &.border-#{$color} {
+      &.border-#{"" + $color} {
         outline: 1px solid $value;
 
         &:focus {
@@ -68,7 +68,7 @@ select {
     }
 
     @each $color, $value in $theme-colors {
-      &.border-#{$color} {
+      &.border-#{"" + $color} {
         outline: 1px solid $value;
 
         &:focus {

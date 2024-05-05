@@ -13,7 +13,7 @@
 		&:first-child {
 			.nav-link {
 				border-radius: 4px 0 0 0;
-			}	
+			}
 		}
 		&:last-child {
 			.nav-link {
@@ -33,7 +33,7 @@
 			&:first-child {
 				.nav-link {
 					border-radius: 4px 4px 0 0;
-				}	
+				}
 			}
 			&:last-child {
 				.nav-link {
@@ -126,7 +126,7 @@
 
 /* Pills color variations */
 @each $color, $value in $theme-colors {
-  .nav-pills-#{$color} {
+  .nav-pills-#{"" + $color} {
     .nav-link {
 			color: $value;
 			&.active {
