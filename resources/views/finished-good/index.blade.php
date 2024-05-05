@@ -30,11 +30,9 @@
                     <th scope="row">{{ $loop->iteration }}</th>
                     <td>{{ $buku->judul }}</td>
                     <td>
-                        <a href="{{ route('finished-goods.show', $buku) }}">
-                            <button class="badge rounded border-0" title="detail">
-                                <i class="text-info h4 mdi mdi-eye-outline menu-icon"></i>
-                            </button>
-                        </a>
+                        <a href="{{ route('finished-goods.show', $buku) }}"><span
+                            class="badge text-bg-light rounded-1"><i
+                                class="menu-icon mdi mdi-eye-outline"></i></span></a>
                     </td>
                 </tr>
             @endforeach

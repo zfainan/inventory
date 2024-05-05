@@ -133,6 +133,14 @@
                             </li>
 
                             <li
+                                class="nav-item {{ Str::startsWith(url()->current(), route('retur.index')) ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ route('retur.index') }}">
+                                    <i class="mdi mdi-truck-trailer menu-icon"></i>
+                                    <span class="menu-title">Retur</span>
+                                </a>
+                            </li>
+
+                            <li
                                 class="nav-item {{ Str::startsWith(url()->current(), route('surat-jalan.index')) ? 'active' : '' }}">
                                 <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
                                     aria-controls="ui-basic">

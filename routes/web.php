@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\CetakIsiController;
+use App\Http\Controllers\DetailReturController;
 use App\Http\Controllers\DetailSuratJalanController;
 use App\Http\Controllers\DistributorController;
 use App\Http\Controllers\FinishedGoodController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\FinishingController;
 use App\Http\Controllers\GrammaturController;
 use App\Http\Controllers\KertasIsiController;
 use App\Http\Controllers\PenerbitController;
+use App\Http\Controllers\ReturController;
 use App\Http\Controllers\SpkController;
 use App\Http\Controllers\SuratJalanController;
 use App\Http\Controllers\UkuranBukuController;
@@ -53,6 +55,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('finished-goods/{buku}', [FinishedGoodController::class, 'show'])
         ->name('finished-goods.show');
+
+    Route::resource('retur', ReturController::class);
+
+    Route::resource('retur.detail', DetailReturController::class);
 });
 
 
