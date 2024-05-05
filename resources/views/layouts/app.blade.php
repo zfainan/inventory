@@ -71,12 +71,12 @@
                                 <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                     {{ Auth::user()->name }}
-                                    <img class="img-xs rounded-circle ms-3" src="/assets/images/faces/face8.jpg"
+                                    <img class="img-xs rounded-circle ms-3" src="/assets/images/faces/face8.jpg" alt=""
                                         alt="Profile image"> </a>
                                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
                                     aria-labelledby="UserDropdown">
                                     <div class="dropdown-header text-center">
-                                        <img class="img-md rounded-circle" src="/assets/images/faces/face8.jpg"
+                                        <img class="img-md rounded-circle" src="/assets/images/faces/face8.jpg" alt=""
                                             alt="Menu profile image">
                                         <p class="mb-1 mt-3 fw-semibold">{{ Auth::user()->name }}</p>
                                         <p class="fw-light text-muted mb-0">{{ Auth::user()->email }}</p>
@@ -167,6 +167,13 @@
                                 <a class="nav-link" href="{{ route('distributor.index') }}">
                                     <i class="mdi mdi-store menu-icon"></i>
                                     <span class="menu-title">Distributor</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('grammatur.index') }}">
+                                    <i class="mdi mdi-decagram-outline menu-icon"></i>
+                                    <span class="menu-title">Grammatur</span>
                                 </a>
                             </li>
 

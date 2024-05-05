@@ -4,6 +4,7 @@ use App\Http\Controllers\BukuController;
 use App\Http\Controllers\DetailSuratJalanController;
 use App\Http\Controllers\DistributorController;
 use App\Http\Controllers\FinishedGoodController;
+use App\Http\Controllers\GrammaturController;
 use App\Http\Controllers\PenerbitController;
 use App\Http\Controllers\SpkController;
 use App\Http\Controllers\SuratJalanController;
@@ -28,6 +29,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('surat-jalan', SuratJalanController::class);
 
     Route::resource('surat-jalan.detail', DetailSuratJalanController::class);
+
+    Route::resource('grammatur', GrammaturController::class);
 });
 
 
