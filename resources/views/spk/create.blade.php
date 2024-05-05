@@ -67,57 +67,57 @@
 
                 <div class="mb-3">
                     <label for="input-booksize" class="form-label">Ukuran buku</label>
-                    <input type="text" class="form-control" name="ukuran_buku" id="input-booksize" required>
+                    <select class="form-select" name="id_ukuran_buku" id="input-booksize" required>
+                        <option selected disabled>Pilih ukuran buku</option>
+                        @foreach ($ukuranBuku as $ukBuku)
+                            <option value="{{ $ukBuku->id }}">{{ $ukBuku->ukuran_buku }}</option>
+                        @endforeach
+                    </select>
 
-                    @error('ukuran_buku')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="mb-3">
-                    <label for="input-grammatur" class="form-label">Grammatur</label>
-                    <div class="input-group">
-                        <input type="number" id="input-grammatur" name="grammatur" class="form-control" required>
-                        <span class="input-group-text">Gram</span>
-                    </div>
-
-                    @error('grammatur')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="mb-3">
-                    <label for="input-cetak-isi" class="form-label">Cetak isi</label>
-                    <input type="text" class="form-control" name="cetak_isi" id="input-cetak-isi" required>
-
-                    @error('cetak_isi')
+                    @error('id_ukuran_buku')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
 
                 <div class="mb-3">
                     <label for="input-ukuran-kertas" class="form-label">Ukuran kertas</label>
-                    <input type="text" class="form-control" name="ukuran_kertas" id="input-ukuran-kertas" required>
+                    <select class="form-select" name="id_ukuran_kertas" id="input-ukuran-kertas" required>
+                        <option selected disabled>Pilih ukuran kertas</option>
+                        @foreach ($ukuranKertas as $ukKertas)
+                            <option value="{{ $ukKertas->id }}">{{ $ukKertas->ukuran }} -
+                                {{ $ukKertas->grammatur?->grammatur }}gr - {{ $ukKertas->kertasIsi?->kertas_isi }}</option>
+                        @endforeach
+                    </select>
 
-                    @error('ukuran_kertas')
+                    @error('id_ukuran_kertas')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
 
                 <div class="mb-3">
-                    <label for="input-kertas-isi" class="form-label">Kertas isi</label>
-                    <input type="text" class="form-control" name="kertas_isi" id="input-kertas-isi" required>
+                    <label for="input-cetak-isi" class="form-label">Cetak isi</label>
+                    <select class="form-select" name="id_cetak_isi" id="input-cetak-isi" required>
+                        <option selected disabled>Pilih cetak isi</option>
+                        @foreach ($cetakIsi as $isi)
+                            <option value="{{ $isi->id }}">{{ $isi->cetak_isi }}</option>
+                        @endforeach
+                    </select>
 
-                    @error('kertas_isi')
+                    @error('id_cetak_isi')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
 
                 <div class="mb-3">
                     <label for="input-finishing" class="form-label">Finishing</label>
-                    <input type="text" class="form-control" name="finishing" id="input-finishing" required>
+                    <select class="form-select" name="id_finishing" id="input-finishing" required>
+                        <option selected disabled>Pilih finishing</option>
+                        @foreach ($finishing as $item)
+                            <option value="{{ $item->id }}">{{ $item->finishing }}</option>
+                        @endforeach
+                    </select>
 
-                    @error('finishing')
+                    @error('id_finishing')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>

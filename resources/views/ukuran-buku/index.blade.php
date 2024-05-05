@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2 class="h4">Data Ukuran Kertas</h2>
+    <h2 class="h4">Data Ukuran Buku</h2>
 
     <div class="d-flex">
         <div class="ms-auto">
-            <a href="javascript:;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createUkuranKertas">Tambah
-                ukuran kertas</a>
+            <a href="javascript:;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createUkuranBuku">Tambah
+                ukuran buku</a>
         </div>
     </div>
 
@@ -33,43 +33,39 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Ukuran</th>
-                <th scope="col">Grammatur</th>
-                <th scope="col">Kertas isi</th>
                 <th scope="col">Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($data as $ukuranKertas)
+            @foreach ($data as $ukuranBuku)
                 <tr>
                     <th scope="row">{{ $loop->iteration }}</th>
-                    <td>{{ $ukuranKertas->ukuran }}</td>
-                    <td>{{ $ukuranKertas->grammatur?->grammatur }} gr</td>
-                    <td>{{ $ukuranKertas->kertasIsi?->kertas_isi }}</td>
+                    <td>{{ $ukuranBuku->ukuran_buku }}</td>
                     <td>
                         <button class="badge rounded border-0" title="delete" data-bs-toggle="modal"
-                            data-bs-target="#deleteUkuranKertas{{ $ukuranKertas->id }}">
+                            data-bs-target="#deleteUkuranBuku{{ $ukuranBuku->id }}">
                             <i class="text-danger h4 mdi mdi-delete menu-icon"></i>
                         </button>
                     </td>
                 </tr>
 
-                <!-- Modal Hapus Ukuran Kertas -->
-                <div class="modal fade" id="deleteUkuranKertas{{ $ukuranKertas->id }}" tabindex="-1"
-                    aria-labelledby="deleteUkuranKertas{{ $ukuranKertas->id }}Label" aria-hidden="true">
+                <!-- Modal Hapus Ukuran Buku -->
+                <div class="modal fade" id="deleteUkuranBuku{{ $ukuranBuku->id }}" tabindex="-1"
+                    aria-labelledby="deleteUkuranBuku{{ $ukuranBuku->id }}Label" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="deleteUkuranKertas{{ $ukuranKertas->id }}Label">Hapus
-                                    Ukuran Kertas
+                                <h1 class="modal-title fs-5" id="deleteUkuranBuku{{ $ukuranBuku->id }}Label">Hapus
+                                    Ukuran Buku
                                 </h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                Anda yakin akan menghapus ukuran kertas {{ $ukuranKertas->ukuran }} - {{ $ukuranKertas->grammatur?->grammatur }}gr - {{ $ukuranKertas->kertasIsi?->kertas_isi }}?
+                                Anda yakin akan menghapus ukuran buku {{ $ukuranBuku->ukuran_ukuran }}?
                             </div>
                             <div class="modal-footer">
-                                <form action="{{ route('ukuran-kertas.destroy', $ukuranKertas) }}" method="POST">
+                                <form action="{{ route('ukuran-buku.destroy', $ukuranBuku) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -86,12 +82,12 @@
     {{ $data->links() }}
 
     <!-- Modal Create Data -->
-    <div class="modal fade" id="createUkuranKertas" tabindex="-1" aria-labelledby="createUkuranKertasLabel"
+    <div class="modal fade" id="createUkuranBuku" tabindex="-1" aria-labelledby="createUkuranBukuLabel"
         aria-hidden="true">
         <div class="modal-dialog">
-            <form class="modal-content" method="POST" action="{{ route('ukuran-kertas.store') }}">
+            <form class="modal-content" method="POST" action="{{ route('ukuran-buku.store') }}">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="createUkuranKertasLabel">Tambah ukuran kertas</h1>
+                    <h1 class="modal-title fs-5" id="createUkuranBukuLabel">Tambah ukuran buku</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -100,27 +96,7 @@
 
                     <div class="mb-3">
                         <label for="input-nama" class="form-label">Ukuran</label><span class="text-danger">*</span>
-                        <input type="text" name="ukuran" class="form-control" id="input-nama" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="input-kertas-isi" class="form-label">Kertas isi</label>
-                        <select class="form-select" name="id_kertas_isi" id="input-kertas-isi" required>
-                            <option selected disabled>Pilih kertas isi</option>
-                            @foreach ($kertasIsi as $item)
-                                <option value="{{ $item->id }}">{{ $item->kertas_isi }} gr</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="input-grammatur" class="form-label">Grammatur</label>
-                        <select class="form-select" name="id_grammatur" id="input-grammatur" required>
-                            <option selected disabled>Pilih grammatur</option>
-                            @foreach ($grammatur as $item)
-                                <option value="{{ $item->id }}">{{ $item->grammatur }} gr</option>
-                            @endforeach
-                        </select>
+                        <input type="text" name="ukuran_buku" class="form-control" id="input-nama" required>
                     </div>
 
                 </div>

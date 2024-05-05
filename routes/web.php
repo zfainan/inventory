@@ -11,6 +11,7 @@ use App\Http\Controllers\KertasIsiController;
 use App\Http\Controllers\PenerbitController;
 use App\Http\Controllers\SpkController;
 use App\Http\Controllers\SuratJalanController;
+use App\Http\Controllers\UkuranBukuController;
 use App\Http\Controllers\UkuranKertasController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('surat-jalan', SuratJalanController::class);
 
     Route::resource('surat-jalan.detail', DetailSuratJalanController::class);
+
+    Route::resource('ukuran-buku', UkuranBukuController::class);
 
     Route::resource('grammatur', GrammaturController::class);
 

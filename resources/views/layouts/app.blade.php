@@ -170,6 +170,13 @@
                             </li>
 
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ route('ukuran-buku.index') }}">
+                                    <i class="mdi mdi-ruler menu-icon"></i>
+                                    <span class="menu-title">Ukuran Buku</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('grammatur.index') }}">
                                     <i class="mdi mdi-decagram menu-icon"></i>
                                     <span class="menu-title">Grammatur</span>
@@ -210,7 +217,7 @@
                 @endauth
 
                 <div class="main-panel">
-                    <div class="content-wrapper">
+                    <div class="content-wrapper py-4">
                         @yield('content')
                     </div>
 

@@ -34,9 +34,17 @@ class SpkController extends Controller
     public function create()
     {
         $books = Buku::get();
+        $ukuranKertas = UkuranKertas::with(['grammatur', 'kertasIsi'])->get();
+        $ukuranBuku = UkuranBuku::get();
+        $cetakIsi = CetakIsi::get();
+        $finishing = Finishing::get();
 
         return view('spk.create', [
-            'books' => $books
+            'books' => $books,
+            'ukuranKertas' => $ukuranKertas,
+            'ukuranBuku' => $ukuranBuku,
+            'cetakIsi' => $cetakIsi,
+            'finishing' => $finishing,
         ]);
     }
 
@@ -47,16 +55,14 @@ class SpkController extends Controller
     {
         $request->validate([
             'id_buku' => 'required|exists:buku,id',
+            'id_ukuran_kertas' => 'required|exists:ukuran_kertas,id',
+            'id_ukuran_buku' => 'required|exists:ukuran_buku,id',
+            'id_cetak_isi' => 'required|exists:cetak_isi,id',
+            'id_finishing' => 'required|string|max:255',
             'tanggal_masuk' => 'required|date',
             'tanggal_keluar' => 'required|date|after:tanggal_masuk',
             'oplah_dasar' => 'required|numeric|min:1',
             'oplah_insheet' => 'required|numeric|min:1',
-            'ukuran_buku' => 'required|string|max:255',
-            'grammatur' => 'required|numeric|min:1',
-            'cetak_isi' => 'required|string|max:255',
-            'ukuran_kertas' => 'required|string|max:255',
-            'kertas_isi' => 'required|string|max:255',
-            'finishing' => 'required|string|max:255',
         ]);
 
         try {
@@ -73,33 +79,12 @@ class SpkController extends Controller
             ]);
             $spk->save();
             $spk->refresh();
-            $spk->save();
 
-            $grammatur = Grammatur::firstOrCreate([
-                'grammatur' => $request->grammatur
-            ]);
-
-            $kertasIsi = KertasIsi::firstOrCreate([
-                'kertas_isi' => $request->kertas_isi
-            ]);
-
-            $ukuranKertas = UkuranKertas::firstOrCreate([
-                'id_kertas_isi' => $kertasIsi->id,
-                'id_grammatur' => $grammatur->id,
-                'ukuran' => $request->ukuran_kertas,
-            ]);
-
-            $ukuranBuku = UkuranBuku::firstOrCreate([
-                'ukuran_buku' => $request->ukuran_buku
-            ]);
-
-            $cetakIsi = CetakIsi::firstOrCreate([
-                'cetak_isi' => $request->cetak_isi
-            ]);
-
-            $finishing = Finishing::firstOrCreate([
-                'finishing' => $request->finishing
-            ]);
+            $ukuranBuku = UkuranBuku::findOrFail($request->id_ukuran_buku);
+            $cetakIsi = CetakIsi::findOrFail($request->id_cetak_isi);
+            $finishing = Finishing::findOrFail($request->id_finishing);
+            $ukuranKertas = UkuranKertas::findOrFail($request->id_ukuran_kertas)
+                ?->load(['grammatur', 'kertasIsi']);
 
             $detailMaterial = new DetailMaterial();
             $detailMaterial->spk()->associate($spk);
@@ -108,7 +93,6 @@ class SpkController extends Controller
             $detailMaterial->cetakIsi()->associate($cetakIsi);
             $detailMaterial->finishing()->associate($finishing);
             $detailMaterial->save();
-            $detailMaterial->refresh();
 
             DB::commit();
 
