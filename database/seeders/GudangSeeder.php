@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Constants\JenisGudang;
 use App\Models\Gudang;
 use Illuminate\Database\Seeder;
 
@@ -14,7 +15,7 @@ class GudangSeeder extends Seeder
     {
         Gudang::firstOrCreate(
             [
-                'jenis' => 'GUDANG_HASIL',
+                'jenis' => JenisGudang::GUDANG_HASIL->value,
             ],
             [
                 'nama' => 'Gudang Hasil',
@@ -23,7 +24,7 @@ class GudangSeeder extends Seeder
 
         Gudang::firstOrCreate(
             [
-                'jenis' => 'GUDANG_RETUR',
+                'jenis' => JenisGudang::GUDANG_RETUR->value,
             ],
             [
                 'nama' => 'Gudang Retur',
