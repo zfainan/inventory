@@ -21,7 +21,7 @@ class DetailNotaPerbaikanController extends Controller
             ->latest()
             ->paginate();
         $petugas = Petugas::all();
-        $detailRetur = DetailRetur::with(['buku'])->get();
+        $detailRetur = DetailRetur::with(['buku'])->latest()->get();
 
         return view('detail-nota-perbaikan.index', [
             'data' => $data,

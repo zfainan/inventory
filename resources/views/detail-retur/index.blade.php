@@ -35,6 +35,7 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
+                <th scope="col">ID</th>
                 <th scope="col">Buku</th>
                 <th scope="col">Qty</th>
             </tr>
@@ -43,6 +44,7 @@
             @foreach ($data as $detailRetur)
                 <tr>
                     <th scope="row">{{ $loop->iteration }}</th>
+                    <td>{{ $detailRetur->id }}</td>
                     <td>{{ $detailRetur->buku->judul }}</td>
                     <td>{{ $detailRetur->qty }}</td>
                 </tr>
