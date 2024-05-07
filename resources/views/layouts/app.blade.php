@@ -141,21 +141,21 @@
                             </li>
 
                             <li
-                                class="nav-item {{ Str::startsWith(url()->current(), route('surat-jalan.index')) ? 'active' : '' }}">
+                                class="nav-item {{ Str::startsWith(url()->current(), route('surat-jalan.index')) || Str::startsWith(url()->current(), route('nota-perbaikan.index')) ? 'active' : '' }}">
                                 <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
                                     aria-controls="ui-basic">
                                     <i class="menu-icon mdi mdi-floor-plan"></i>
                                     <span class="menu-title">Documents</span>
                                     <i class="menu-arrow"></i>
                                 </a>
-                                <div class="collapse  {{ Str::startsWith(url()->current(), route('surat-jalan.index')) ? 'show' : '' }}"
+                                <div class="collapse  {{ Str::startsWith(url()->current(), route('surat-jalan.index')) || Str::startsWith(url()->current(), route('nota-perbaikan.index')) ? 'show' : '' }}"
                                     id="ui-basic">
                                     <ul class="nav flex-column sub-menu">
                                         <li
-                                            class="nav-item  {{ Str::startsWith(url()->current(), route('surat-jalan.index')) ? 'active' : '' }}">
+                                            class="nav-item {{ Str::startsWith(url()->current(), route('surat-jalan.index')) ? 'active' : '' }}">
                                             <a class="nav-link" href="{{ route('surat-jalan.index') }}">Surat Jalan</a>
                                         </li>
-                                        <li class="nav-item"> <a class="nav-link" href="#">Nota Perbaikan</a></li>
+                                        <li class="nav-item {{ Str::startsWith(url()->current(), route('nota-perbaikan.index')) ? 'active' : '' }}"> <a class="nav-link" href="{{ route('nota-perbaikan.index') }}">Nota Perbaikan</a></li>
                                     </ul>
                                 </div>
                             </li>

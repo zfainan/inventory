@@ -2,25 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Distributor;
+use App\Models\NotaPerbaikan;
 use App\Models\Petugas;
-use App\Models\Retur;
 use Illuminate\Http\Request;
 
-class ReturController extends Controller
+class NotaPerbaikanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = Retur::with(['petugas', 'distributor'])->latest()->paginate();
-        $distributor = Distributor::latest()->get();
+        $data = NotaPerbaikan::with('petugas')->latest()->paginate();
         $petugas = Petugas::latest()->get();
 
-        return view('retur.index', [
+        return view('nota-perbaikan.index', [
             'data' => $data,
-            'distributor' => $distributor,
             'petugas' => $petugas,
         ]);
     }
@@ -39,28 +36,26 @@ class ReturController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_distributor' => 'required',
             'id_petugas' => 'required',
             'tanggal' => 'required|date',
         ]);
 
         try {
-            Retur::create([
-                'id_distributor' => $request->id_distributor,
+            NotaPerbaikan::create([
                 'id_petugas' => $request->id_petugas,
                 'tanggal' => $request->tanggal,
             ]);
 
-            return redirect(route('retur.index'))->with('status', 'Berhasil simpan data!');
+            return redirect(route('nota-perbaikan.index'))->with('status', 'Berhasil tambah data!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Gagal simpan data! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Gagal tambah data! ' . $th->getMessage());
         }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Retur $retur)
+    public function show(NotaPerbaikan $notaPerbaikan)
     {
         //
     }
@@ -68,7 +63,7 @@ class ReturController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Retur $retur)
+    public function edit(NotaPerbaikan $notaPerbaikan)
     {
         //
     }
@@ -76,7 +71,7 @@ class ReturController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Retur $retur)
+    public function update(Request $request, NotaPerbaikan $notaPerbaikan)
     {
         //
     }
@@ -84,7 +79,7 @@ class ReturController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Retur $retur)
+    public function destroy(NotaPerbaikan $notaPerbaikan)
     {
         //
     }

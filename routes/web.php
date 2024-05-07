@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\CetakIsiController;
+use App\Http\Controllers\DetailNotaPerbaikanController;
 use App\Http\Controllers\DetailReturController;
 use App\Http\Controllers\DetailSuratJalanController;
 use App\Http\Controllers\DistributorController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\FinishedGoodController;
 use App\Http\Controllers\FinishingController;
 use App\Http\Controllers\GrammaturController;
 use App\Http\Controllers\KertasIsiController;
+use App\Http\Controllers\NotaPerbaikanController;
 use App\Http\Controllers\PenerbitController;
 use App\Http\Controllers\ReturController;
 use App\Http\Controllers\SpkController;
@@ -59,6 +61,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('retur', ReturController::class);
 
     Route::resource('retur.detail', DetailReturController::class);
+
+    Route::resource('nota-perbaikan', NotaPerbaikanController::class);
+
+    Route::resource('nota-perbaikan.detail', DetailNotaPerbaikanController::class);
 });
 
 
