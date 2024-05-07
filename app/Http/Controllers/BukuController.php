@@ -16,7 +16,7 @@ class BukuController extends Controller
         $data = Buku::latest()->paginate();
 
         return view('buku.index', [
-            'data' => $data
+            'data' => $data,
         ]);
     }
 
@@ -28,7 +28,7 @@ class BukuController extends Controller
         $penerbit = Penerbit::all();
 
         return view('buku.create', [
-            'penerbit' => $penerbit
+            'penerbit' => $penerbit,
         ]);
     }
 

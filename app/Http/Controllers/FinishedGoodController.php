@@ -17,7 +17,7 @@ class FinishedGoodController extends Controller
         $data = Buku::latest()->paginate();
 
         return view('finished-good.index', [
-            'data' => $data
+            'data' => $data,
         ]);
     }
 
@@ -60,7 +60,7 @@ class FinishedGoodController extends Controller
 
             return redirect(route('finished-goods.index'))->with('status', 'Input data berhasil!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Input data gagal! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Input data gagal! '.$th->getMessage());
         }
     }
 

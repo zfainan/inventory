@@ -19,7 +19,6 @@ return new class extends Migration
             $table->integer('qty');
             $table->timestamps();
 
-
             $table->foreign('id_surat_jalan')->references('id')->on('surat_jalan');
             $table->foreign('id_buku')->references('id')->on('buku');
             $table->foreign('id_distributor')->references('id')->on('distributor');

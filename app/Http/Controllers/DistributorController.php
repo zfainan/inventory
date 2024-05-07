@@ -15,7 +15,7 @@ class DistributorController extends Controller
         $data = Distributor::latest()->paginate();
 
         return view('distributor.index', [
-            'data' => $data
+            'data' => $data,
         ]);
     }
 
@@ -33,11 +33,11 @@ class DistributorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required|string|max:255'
+            'nama' => 'required|string|max:255',
         ]);
 
         Distributor::create([
-            'nama' => $request->nama
+            'nama' => $request->nama,
         ]);
 
         return redirect(route('distributor.index'))->with('status', 'Berhasil simpan data!');

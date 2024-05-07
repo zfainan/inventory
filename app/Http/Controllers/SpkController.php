@@ -6,8 +6,6 @@ use App\Models\Buku;
 use App\Models\CetakIsi;
 use App\Models\DetailMaterial;
 use App\Models\Finishing;
-use App\Models\Grammatur;
-use App\Models\KertasIsi;
 use App\Models\Spk;
 use App\Models\UkuranBuku;
 use App\Models\UkuranKertas;
@@ -24,7 +22,7 @@ class SpkController extends Controller
         $data = Spk::with(['detailMaterial', 'buku.penerbit'])->latest()->paginate();
 
         return view('spk.index', [
-            'data' => $data
+            'data' => $data,
         ]);
     }
 
@@ -100,7 +98,7 @@ class SpkController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
 
-            return redirect()->back()->with('status', 'Input data SPK gagal! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Input data SPK gagal! '.$th->getMessage());
         }
     }
 

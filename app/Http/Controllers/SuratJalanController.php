@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Distributor;
 use App\Models\Petugas;
 use App\Models\SuratJalan;
 use Illuminate\Http\Request;
@@ -17,7 +16,7 @@ class SuratJalanController extends Controller
         $data = SuratJalan::latest()->paginate();
 
         return view('surat-jalan.index', [
-            'data' => $data
+            'data' => $data,
         ]);
     }
 
@@ -29,7 +28,7 @@ class SuratJalanController extends Controller
         $employees = Petugas::all();
 
         return view('surat-jalan.create', [
-            'employees' => $employees
+            'employees' => $employees,
         ]);
     }
 
@@ -51,7 +50,7 @@ class SuratJalanController extends Controller
 
             return redirect(route('surat-jalan.index'))->with('status', 'Surat jalan berhasil dibuat!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Surat jalan gagal dibuat! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Surat jalan gagal dibuat! '.$th->getMessage());
         }
     }
 

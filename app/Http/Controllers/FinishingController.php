@@ -16,7 +16,7 @@ class FinishingController extends Controller
         $data = Finishing::latest()->paginate();
 
         return view('finishing.index', [
-            'data' => $data
+            'data' => $data,
         ]);
     }
 
@@ -34,17 +34,17 @@ class FinishingController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'finishing' => 'required'
+            'finishing' => 'required',
         ]);
 
         try {
             Finishing::create([
-                'finishing' => $request->finishing
+                'finishing' => $request->finishing,
             ]);
 
             return redirect(route('finishing.index'))->with('status', 'Berhasil simpan data!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Gagal simpan data! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Gagal simpan data! '.$th->getMessage());
         }
     }
 
@@ -86,7 +86,7 @@ class FinishingController extends Controller
 
             return redirect(route('finishing.index'))->with('status', 'Berhasil hapus data!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Gagal hapus data! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Gagal hapus data! '.$th->getMessage());
         }
     }
 }

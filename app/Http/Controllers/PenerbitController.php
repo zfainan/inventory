@@ -15,7 +15,7 @@ class PenerbitController extends Controller
         $data = Penerbit::latest()->paginate();
 
         return view('penerbit.index', [
-            'data' => $data
+            'data' => $data,
         ]);
     }
 
@@ -33,11 +33,11 @@ class PenerbitController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'penerbit' => 'required'
+            'penerbit' => 'required',
         ]);
 
         Penerbit::create([
-            'penerbit' => $request->penerbit
+            'penerbit' => $request->penerbit,
         ]);
 
         return redirect(route('penerbit.index'))->with('status', 'Berhasil simpan data!');

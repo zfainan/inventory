@@ -48,7 +48,7 @@ class NotaPerbaikanController extends Controller
 
             return redirect(route('nota-perbaikan.index'))->with('status', 'Berhasil tambah data!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Gagal tambah data! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Gagal tambah data! '.$th->getMessage());
         }
     }
 

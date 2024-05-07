@@ -16,7 +16,7 @@ class KertasIsiController extends Controller
         $data = KertasIsi::latest()->paginate();
 
         return view('kertas-isi.index', [
-            'data' => $data
+            'data' => $data,
         ]);
     }
 
@@ -34,17 +34,17 @@ class KertasIsiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kertas_isi' => 'required'
+            'kertas_isi' => 'required',
         ]);
 
         try {
             KertasIsi::create([
-                'kertas_isi' => $request->kertas_isi
+                'kertas_isi' => $request->kertas_isi,
             ]);
 
             return redirect(route('kertas-isi.index'))->with('status', 'Berhasil simpan data!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Gagal simpan data! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Gagal simpan data! '.$th->getMessage());
         }
     }
 
@@ -86,7 +86,7 @@ class KertasIsiController extends Controller
 
             return redirect(route('kertas-isi.index'))->with('status', 'Berhasil hapus data!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Gagal hapus data! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Gagal hapus data! '.$th->getMessage());
         }
     }
 }

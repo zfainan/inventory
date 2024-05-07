@@ -54,7 +54,7 @@ class UkuranKertasController extends Controller
 
             return redirect(route('ukuran-kertas.index'))->with('status', 'Berhasil simpan data!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Gagal simpan data! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Gagal simpan data! '.$th->getMessage());
         }
     }
 
@@ -96,7 +96,7 @@ class UkuranKertasController extends Controller
 
             return redirect(route('ukuran-kertas.index'))->with('status', 'Berhasil hapus data!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Gagal hapus data! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Gagal hapus data! '.$th->getMessage());
         }
     }
 }

@@ -56,7 +56,7 @@ class DetailSuratJalanController extends Controller
 
             return redirect(route('surat-jalan.detail.index', $suratJalan))->with('status', 'Tambah data berhasil!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Tambah data gagal! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Tambah data gagal! '.$th->getMessage());
         }
     }
 

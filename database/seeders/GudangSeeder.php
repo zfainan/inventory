@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Gudang;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class GudangSeeder extends Seeder
@@ -15,19 +14,19 @@ class GudangSeeder extends Seeder
     {
         Gudang::firstOrCreate(
             [
-                'jenis' => 'GUDANG_HASIL'
+                'jenis' => 'GUDANG_HASIL',
             ],
             [
-                'nama' => 'Gudang Hasil'
+                'nama' => 'Gudang Hasil',
             ]
         );
 
         Gudang::firstOrCreate(
             [
-                'jenis' => 'GUDANG_RETUR'
+                'jenis' => 'GUDANG_RETUR',
             ],
             [
-                'nama' => 'Gudang Retur'
+                'nama' => 'Gudang Retur',
             ]
         );
     }

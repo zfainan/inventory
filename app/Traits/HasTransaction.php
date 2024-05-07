@@ -5,8 +5,8 @@ namespace App\Traits;
 use App\Models\Transaction;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
-trait HasTransaction {
-
+trait HasTransaction
+{
     public function transaction(): MorphOne
     {
         return $this->morphOne(

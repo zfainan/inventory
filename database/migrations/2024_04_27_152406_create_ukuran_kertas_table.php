@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('ukuran');
             $table->timestamps();
 
-
             $table->foreign('id_grammatur')->references('id')->on('grammatur');
             $table->foreign('id_kertas_isi')->references('id')->on('kertas_isi');
         });

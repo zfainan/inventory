@@ -15,7 +15,7 @@ class Transaction extends Model
     {
         static::created(function (self $transaction) {
             $transaction->inventory->update([
-                'stok' => $transaction->inventory->stok + $transaction->qty
+                'stok' => $transaction->inventory->stok + $transaction->qty,
             ]);
         });
     }

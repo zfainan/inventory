@@ -16,7 +16,7 @@ class CetakIsiController extends Controller
         $data = CetakIsi::latest()->paginate();
 
         return view('cetak-isi.index', [
-            'data' => $data
+            'data' => $data,
         ]);
     }
 
@@ -34,17 +34,17 @@ class CetakIsiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'cetak_isi' => 'required'
+            'cetak_isi' => 'required',
         ]);
 
         try {
             CetakIsi::create([
-                'cetak_isi' => $request->cetak_isi
+                'cetak_isi' => $request->cetak_isi,
             ]);
 
             return redirect(route('cetak-isi.index'))->with('status', 'Berhasil simpan data!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Gagal simpan data! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Gagal simpan data! '.$th->getMessage());
         }
     }
 
@@ -86,7 +86,7 @@ class CetakIsiController extends Controller
 
             return redirect(route('cetak-isi.index'))->with('status', 'Berhasil hapus data!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Gagal hapus data! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Gagal hapus data! '.$th->getMessage());
         }
     }
 }

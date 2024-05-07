@@ -16,7 +16,7 @@ class GrammaturController extends Controller
         $data = Grammatur::latest()->paginate();
 
         return view('grammatur.index', [
-            'data' => $data
+            'data' => $data,
         ]);
     }
 
@@ -34,17 +34,17 @@ class GrammaturController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'grammatur' => 'required'
+            'grammatur' => 'required',
         ]);
 
         try {
             Grammatur::create([
-                'grammatur' => $request->grammatur
+                'grammatur' => $request->grammatur,
             ]);
 
             return redirect(route('grammatur.index'))->with('status', 'Berhasil simpan data!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Gagal simpan data! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Gagal simpan data! '.$th->getMessage());
         }
     }
 
@@ -86,7 +86,7 @@ class GrammaturController extends Controller
 
             return redirect(route('grammatur.index'))->with('status', 'Berhasil hapus data!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Gagal hapus data! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Gagal hapus data! '.$th->getMessage());
         }
     }
 }

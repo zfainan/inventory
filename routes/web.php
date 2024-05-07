@@ -52,7 +52,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('ukuran-kertas', UkuranKertasController::class)
         ->parameters([
-            'ukuran-kertas' => 'ukuran_kertas'
+            'ukuran-kertas' => 'ukuran_kertas',
         ]);
 
     Route::get('finished-goods/{buku}', [FinishedGoodController::class, 'show'])
@@ -66,7 +66,6 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('nota-perbaikan.detail', DetailNotaPerbaikanController::class);
 });
-
 
 Auth::routes();
 
