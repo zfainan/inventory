@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inventory;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
 class InventoryGudangHasilController extends Controller
@@ -38,15 +39,23 @@ class InventoryGudangHasilController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Inventory $inventory)
+    public function show(Inventory $inventoryHasil)
     {
-        //
+        $data = Transaction::with('transactionable')
+            ->where('id_inventory', $inventoryHasil->id)
+            ->latest()
+            ->paginate();
+
+        return view('inventory.hasil.show', [
+            'data' => $data,
+            'inventory' => $inventoryHasil,
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Inventory $inventory)
+    public function edit(Inventory $inventoryHasil)
     {
         //
     }
@@ -54,7 +63,7 @@ class InventoryGudangHasilController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Inventory $inventory)
+    public function update(Request $request, Inventory $inventoryHasil)
     {
         //
     }
@@ -62,7 +71,7 @@ class InventoryGudangHasilController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Inventory $inventory)
+    public function destroy(Inventory $inventoryHasil)
     {
         //
     }

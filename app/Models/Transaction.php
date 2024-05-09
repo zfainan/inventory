@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,6 +12,8 @@ class Transaction extends Model
 {
     use HasFactory;
 
+    protected $with = ['transactionable'];
+
     protected static function booted(): void
     {
         static::created(function (self $transaction) {
@@ -18,6 +21,21 @@ class Transaction extends Model
                 'stok' => $transaction->inventory->stok + $transaction->qty,
             ]);
         });
+    }
+
+    public function description(): Attribute
+    {
+        $desc = '-';
+
+        if ($this->transactionable instanceof DetailSpk) {
+            $desc = 'Hasil cetak';
+        }
+
+        if ($this->transactionable instanceof DetailSuratJalan) {
+            $desc = 'Surat jalan';
+        }
+
+        return Attribute::make(get: fn() => $desc);
     }
 
     public function transactionable(): MorphTo
