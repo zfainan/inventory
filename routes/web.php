@@ -14,6 +14,7 @@ use App\Http\Controllers\InventoryGudangReturController;
 use App\Http\Controllers\KertasIsiController;
 use App\Http\Controllers\NotaPerbaikanController;
 use App\Http\Controllers\PenerbitController;
+use App\Http\Controllers\PenguranganStokController;
 use App\Http\Controllers\ReturController;
 use App\Http\Controllers\SpkController;
 use App\Http\Controllers\SuratJalanController;
@@ -71,6 +72,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('inventory-hasil', InventoryGudangHasilController::class);
 
     Route::resource('inventory-retur', InventoryGudangReturController::class);
+
+    Route::post('stock-decrease', PenguranganStokController::class)
+        ->name('stock-decrease.store');
 });
 
 Auth::routes();

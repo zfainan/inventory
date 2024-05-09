@@ -11,4 +11,6 @@ class BarangKeluar extends Model
     use HasFactory, HasTransaction;
 
     protected $table = 'barang_keluar';
+
+    protected $guarded = ['id'];
 }

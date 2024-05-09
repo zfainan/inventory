@@ -43,6 +43,10 @@ class Transaction extends Model
             $desc = 'Pengurangan stok dari nota perbaikan';
         }
 
+        if ($this->transactionable instanceof BarangKeluar) {
+            $desc = 'Pengurangan stok: ' . $this->transactionable->deskripsi;
+        }
+
         return Attribute::make(get: fn() => $desc);
     }
 
