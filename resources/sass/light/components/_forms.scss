@@ -22,21 +22,25 @@
 .form-select {
   border: 1px solid $border-color;
   font-weight: 400;
-  // font-size: $input-font-size;
+  font-size: $input-font-size;
   border-radius: 4px;
-  height: $input-height;
+}
+
+.form-select {
+    height: $input-height;
+    padding: $input-padding-y $input-padding-x;
 }
 
 select {
   &.form-control {
-    padding: .4375rem .75rem;
+    // padding: .4375rem .75rem;
     border: 0;
     outline: 1px solid $border-color;
     color: $input-placeholder-color;
     appearance: none;
-    background: url("../../images/arrow-down.svg");
+    background: url("/assets/images/arrow-down.svg");
     background-repeat: no-repeat;
-    background-position: 99% center;
+    background-position: 97.5% center;
 
     &:focus {
       outline: 1px solid $border-color;
@@ -54,14 +58,13 @@ select {
   }
 
   &.form-select {
-    padding: .4375rem .75rem;
     border: 0;
     outline: 1px solid $border-color;
     color: $body-color;
     appearance: none;
-    background: url("../../images/arrow-down.svg");
+    background: url("/assets/images/arrow-down.svg");
     background-repeat: no-repeat;
-    background-position: 99% center;
+    background-position: 97.5% center;
 
     &:focus {
       outline: 1px solid $border-color;
