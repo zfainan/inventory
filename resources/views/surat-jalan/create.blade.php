@@ -38,7 +38,7 @@
                     @enderror
                 </div>
 
-                <a href="{{ route('spk.index') }}" type="button" class="btn btn-outline-light mt-4 me-2">Batal</a>
+                <a href="{{ route('surat-jalan.index') }}" type="button" class="btn btn-outline-light mt-4 me-2">Batal</a>
                 <button type="submit" class="btn btn-primary mt-4">Simpan</button>
 
             </form>

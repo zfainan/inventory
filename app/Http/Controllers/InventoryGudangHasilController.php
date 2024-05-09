@@ -5,14 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Inventory;
 use Illuminate\Http\Request;
 
-class InventoryController extends Controller
+class InventoryGudangHasilController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $data = Inventory::gudangHasil()->with('buku')->latest()->paginate();
+
+        return view('inventory.hasil.index', [
+            'data' => $data
+        ]);
     }
 
     /**

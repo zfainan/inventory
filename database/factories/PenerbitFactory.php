@@ -17,7 +17,7 @@ class PenerbitFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'penerbit' => fake()->company()
         ];
     }
 }

@@ -7,6 +7,7 @@ use App\Models\DetailSuratJalan;
 use App\Models\Distributor;
 use App\Models\SuratJalan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DetailSuratJalanController extends Controller
 {
@@ -15,8 +16,11 @@ class DetailSuratJalanController extends Controller
      */
     public function index(SuratJalan $suratJalan)
     {
-        $data = DetailSuratJalan::with(['buku', 'distributor'])->latest()->paginate();
-        $buku = Buku::with(['penerbit'])->get();
+        $data = DetailSuratJalan::with(['buku', 'distributor'])
+            ->where('id_surat_jalan', $suratJalan->id)
+            ->latest()
+            ->paginate();
+        $buku = Buku::gudangHasil()->with(['penerbit'])->get();
         $distributor = Distributor::get();
 
         return view('detail-surat-jalan.index', [
@@ -47,6 +51,8 @@ class DetailSuratJalanController extends Controller
         ]);
 
         try {
+            DB::beginTransaction();
+
             DetailSuratJalan::create([
                 'id_surat_jalan' => $suratJalan->id,
                 'id_buku' => $request->id_buku,
@@ -54,9 +60,13 @@ class DetailSuratJalanController extends Controller
                 'qty' => $request->qty,
             ]);
 
+            DB::commit();
+
             return redirect(route('surat-jalan.detail.index', $suratJalan))->with('status', 'Tambah data berhasil!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Tambah data gagal! '.$th->getMessage());
+            DB::rollBack();
+
+            return redirect()->back()->with('status', 'Tambah data gagal! ' . $th->getMessage());
         }
     }
 

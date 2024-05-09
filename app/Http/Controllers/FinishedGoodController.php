@@ -14,7 +14,7 @@ class FinishedGoodController extends Controller
      */
     public function index()
     {
-        $data = Buku::latest()->paginate();
+        $data = Buku::whereHas('hasilCetak')->latest()->paginate();
 
         return view('finished-good.index', [
             'data' => $data,

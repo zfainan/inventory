@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Distributor;
 use Illuminate\Database\Seeder;
 
 class DistributorSeeder extends Seeder
@@ -11,6 +12,6 @@ class DistributorSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Distributor::factory(5)->create();
     }
 }

@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use App\Constants\JenisGudang;
+use App\Jobs\CreateSuratJalanTransaction;
 use App\Traits\HasTransaction;
+use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,6 +17,23 @@ class DetailSuratJalan extends Model
     protected $table = 'detail_surat_jalan';
 
     protected $guarded = ['id'];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function (self $detailSuratJalan) {
+            $inventory = Inventory::where('id_buku', $detailSuratJalan->id_buku)
+                ->where('id_gudang', Gudang::firstWhere('jenis', JenisGudang::GUDANG_HASIL->value)->id)
+                ->firstOrFail();
+
+            if ($inventory->stok < $detailSuratJalan->qty) {
+                throw new Exception("Stok buku kurang dari {$detailSuratJalan->qty}"); // NOSONAR
+            }
+
+            dispatch(new CreateSuratJalanTransaction($detailSuratJalan, $inventory));
+        });
+    }
 
     public function suratJalan(): BelongsTo
     {

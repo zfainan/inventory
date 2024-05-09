@@ -16,7 +16,10 @@ class DetailReturController extends Controller
     {
         $retur->load(['distributor', 'petugas']);
 
-        $data = DetailRetur::with(['buku'])->latest()->paginate();
+        $data = DetailRetur::with(['buku'])
+            ->where('id_retur', $retur->id)
+            ->latest()
+            ->paginate();
         $buku = Buku::latest()->get();
 
         return view('detail-retur.index', [
@@ -53,7 +56,7 @@ class DetailReturController extends Controller
 
             return redirect(route('retur.detail.index', $retur))->with('status', 'Berhasil tambah data!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Gagal tambah data! '.$th->getMessage());
+            return redirect()->back()->with('status', 'Gagal tambah data! ' . $th->getMessage());
         }
     }
 
