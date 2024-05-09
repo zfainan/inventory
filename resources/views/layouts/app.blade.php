@@ -160,14 +160,14 @@
                             </li>
 
                             <li
-                                class="nav-item {{ Str::startsWith(url()->current(), route('inventory-hasil.index')) || Str::startsWith(url()->current(), route('nota-perbaikan.index')) ? 'active' : '' }}">
+                                class="nav-item {{ Str::startsWith(url()->current(), route('inventory-hasil.index')) || Str::startsWith(url()->current(), route('inventory-retur.index')) ? 'active' : '' }}">
                                 <a class="nav-link" data-bs-toggle="collapse" href="#inventory-dd" aria-expanded="false"
                                     aria-controls="inventory-dd">
                                     <i class="menu-icon mdi mdi-package"></i>
                                     <span class="menu-title">Inventories</span>
                                     <i class="menu-arrow"></i>
                                 </a>
-                                <div class="collapse  {{ Str::startsWith(url()->current(), route('inventory-hasil.index')) || Str::startsWith(url()->current(), route('nota-perbaikan.index')) ? 'show' : '' }}"
+                                <div class="collapse  {{ Str::startsWith(url()->current(), route('inventory-hasil.index')) || Str::startsWith(url()->current(), route('inventory-retur.index')) ? 'show' : '' }}"
                                     id="inventory-dd">
                                     <ul class="nav flex-column sub-menu">
                                         <li
@@ -176,8 +176,8 @@
                                                 Hasil</a>
                                         </li>
                                         <li
-                                            class="nav-item">
-                                            <a class="nav-link" href="{{ route('inventory-hasil.index') }}">Gudang
+                                            class="nav-item {{ Str::startsWith(url()->current(), route('inventory-retur.index')) ? 'active' : '' }}">
+                                            <a class="nav-link" href="{{ route('inventory-retur.index') }}">Gudang
                                                 Retur</a></li>
                                     </ul>
                                 </div>

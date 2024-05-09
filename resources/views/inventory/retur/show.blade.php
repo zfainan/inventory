@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2 class="h4">Inventory Gudang Hasil</h2>
-    <p>Stock log: {{ $inventory->buku?->judul }}</p>
+    <h2 class="h4">Inventory Gudang Retur</h2>
+    <p>Stock log</p>
 
     @session('status')
         <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">

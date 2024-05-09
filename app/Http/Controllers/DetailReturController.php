@@ -6,6 +6,7 @@ use App\Models\Buku;
 use App\Models\DetailRetur;
 use App\Models\Retur;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DetailReturController extends Controller
 {
@@ -48,14 +49,20 @@ class DetailReturController extends Controller
         ]);
 
         try {
+            DB::beginTransaction();
+
             DetailRetur::create([
                 'id_retur' => $retur->id,
                 'id_buku' => $request->id_buku,
                 'qty' => $request->qty,
             ]);
 
+            DB::commit();
+
             return redirect(route('retur.detail.index', $retur))->with('status', 'Berhasil tambah data!');
         } catch (\Throwable $th) {
+            DB::rollBack();
+
             return redirect()->back()->with('status', 'Gagal tambah data! ' . $th->getMessage());
         }
     }

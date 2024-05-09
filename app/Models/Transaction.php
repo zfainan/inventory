@@ -28,11 +28,19 @@ class Transaction extends Model
         $desc = '-';
 
         if ($this->transactionable instanceof DetailSpk) {
-            $desc = 'Hasil cetak';
+            $desc = 'Penambahan stok dari hasil cetak';
         }
 
         if ($this->transactionable instanceof DetailSuratJalan) {
-            $desc = 'Surat jalan';
+            $desc = 'Pengurangan stok dari surat jalan';
+        }
+
+        if ($this->transactionable instanceof DetailRetur) {
+            $desc = 'Penambahan stok dari retur';
+        }
+
+        if ($this->transactionable instanceof DetailNotaPerbaikan) {
+            $desc = 'Pengurangan stok dari nota perbaikan';
         }
 
         return Attribute::make(get: fn() => $desc);

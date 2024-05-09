@@ -12,6 +12,10 @@ class DetailSpk extends Model
 {
     use HasFactory, HasTransaction;
 
+    protected $table = 'detail_spk';
+
+    protected $guarded = ['id'];
+
     protected static function boot()
     {
         parent::boot();
@@ -20,10 +24,6 @@ class DetailSpk extends Model
             dispatch(new CreateFinishedGoodTransaction($detailSpk));
         });
     }
-
-    protected $table = 'detail_spk';
-
-    protected $guarded = ['id'];
 
     public function spk(): BelongsTo
     {

@@ -7,6 +7,7 @@ use App\Models\DetailRetur;
 use App\Models\NotaPerbaikan;
 use App\Models\Petugas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DetailNotaPerbaikanController extends Controller
 {
@@ -52,6 +53,8 @@ class DetailNotaPerbaikanController extends Controller
         ]);
 
         try {
+            DB::beginTransaction();
+
             DetailNotaPerbaikan::create([
                 'id_nota_perbaikan' => $notaPerbaikan->id,
                 'id_petugas' => $request->id_petugas,
@@ -60,8 +63,12 @@ class DetailNotaPerbaikanController extends Controller
                 'qty' => $request->qty,
             ]);
 
+            DB::commit();
+
             return redirect(route('nota-perbaikan.detail.index', $notaPerbaikan))->with('status', 'Berhasil tambah data!');
         } catch (\Throwable $th) {
+            DB::rollBack();
+
             return redirect()->back()->with('status', 'Gagal tambah data! '.$th->getMessage());
         }
     }

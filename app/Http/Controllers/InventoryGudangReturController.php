@@ -7,16 +7,16 @@ use App\Models\Inventory;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 
-class InventoryGudangHasilController extends Controller
+class InventoryGudangReturController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = Inventory::gudangHasil()->with('buku')->latest()->paginate();
+        $data = Inventory::gudangRetur()->with('buku')->latest()->paginate();
 
-        return view('inventory.hasil.index', [
+        return view('inventory.retur.index', [
             'data' => $data
         ]);
     }
@@ -40,27 +40,27 @@ class InventoryGudangHasilController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Inventory $inventoryHasil)
+    public function show(Inventory $inventoryRetur)
     {
-        if ($inventoryHasil->gudang->jenis == JenisGudang::GUDANG_RETUR->value) {
+        if ($inventoryRetur->gudang->jenis == JenisGudang::GUDANG_HASIL->value) {
             abort(404);
         }
 
         $data = Transaction::with('transactionable')
-            ->where('id_inventory', $inventoryHasil->id)
+            ->where('id_inventory', $inventoryRetur->id)
             ->latest()
             ->paginate();
 
-        return view('inventory.hasil.show', [
+        return view('inventory.retur.show', [
             'data' => $data,
-            'inventory' => $inventoryHasil,
+            'inventory' => $inventoryRetur,
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Inventory $inventoryHasil)
+    public function edit(Inventory $inventoryRetur)
     {
         //
     }
@@ -68,7 +68,7 @@ class InventoryGudangHasilController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Inventory $inventoryHasil)
+    public function update(Request $request, Inventory $inventoryRetur)
     {
         //
     }
@@ -76,7 +76,7 @@ class InventoryGudangHasilController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Inventory $inventoryHasil)
+    public function destroy(Inventory $inventoryRetur)
     {
         //
     }

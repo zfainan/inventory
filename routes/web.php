@@ -10,6 +10,7 @@ use App\Http\Controllers\FinishedGoodController;
 use App\Http\Controllers\FinishingController;
 use App\Http\Controllers\GrammaturController;
 use App\Http\Controllers\InventoryGudangHasilController;
+use App\Http\Controllers\InventoryGudangReturController;
 use App\Http\Controllers\KertasIsiController;
 use App\Http\Controllers\NotaPerbaikanController;
 use App\Http\Controllers\PenerbitController;
@@ -68,6 +69,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('nota-perbaikan.detail', DetailNotaPerbaikanController::class);
 
     Route::resource('inventory-hasil', InventoryGudangHasilController::class);
+
+    Route::resource('inventory-retur', InventoryGudangReturController::class);
 });
 
 Auth::routes();

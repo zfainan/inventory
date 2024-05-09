@@ -6,6 +6,7 @@ use App\Models\Buku;
 use App\Models\DetailSpk;
 use App\Models\Spk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FinishedGoodController extends Controller
 {
@@ -45,6 +46,8 @@ class FinishedGoodController extends Controller
         ]);
 
         try {
+            DB::beginTransaction();
+
             $spk = Spk::findOrFail($request->id_spk);
             $stok = $spk->detailSpk?->sum('stok');
 
@@ -58,8 +61,12 @@ class FinishedGoodController extends Controller
             ]);
             $detailSpk->save();
 
+            DB::commit();
+
             return redirect(route('finished-goods.index'))->with('status', 'Input data berhasil!');
         } catch (\Throwable $th) {
+            DB::rollBack();
+
             return redirect()->back()->with('status', 'Input data gagal! '.$th->getMessage());
         }
     }

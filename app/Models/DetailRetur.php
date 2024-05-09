@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Jobs\CreateReturTransaction;
 use App\Traits\HasTransaction;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,6 +15,15 @@ class DetailRetur extends Model
     protected $table = 'detail_retur';
 
     protected $guarded = ['id'];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function(self $detailRetur) {
+            dispatch(new CreateReturTransaction($detailRetur));
+        });
+    }
 
     public function retur(): BelongsTo
     {
