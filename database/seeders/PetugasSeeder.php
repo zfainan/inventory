@@ -17,9 +17,15 @@ class PetugasSeeder extends Seeder
             'nama_petugas' => fake()->name,
             'jabatan' => JabatanEnum::PETUGAS_GUDANG_HASIL->value,
         ]);
+
         Petugas::create([
             'nama_petugas' => fake()->name,
             'jabatan' => JabatanEnum::PETUGAS_GUDANG_RETUR->value,
+        ]);
+
+        Petugas::create([
+            'nama_petugas' => fake()->name,
+            'jabatan' => JabatanEnum::MANAGER->value,
         ]);
     }
 }

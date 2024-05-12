@@ -28,5 +28,12 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password'),
             'id_petugas' => Petugas::firstWhere('jabatan', JabatanEnum::PETUGAS_GUDANG_HASIL->value)->id,
         ]);
+
+        User::create([
+            'name' => 'Manager',
+            'email' => 'manager@example.com',
+            'password' => Hash::make('password'),
+            'id_petugas' => Petugas::firstWhere('jabatan', JabatanEnum::MANAGER->value)->id,
+        ]);
     }
 }

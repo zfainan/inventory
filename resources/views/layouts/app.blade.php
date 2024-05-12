@@ -186,6 +186,14 @@
                             <li class="nav-item nav-category">Master Data</li>
 
                             <li
+                                class="nav-item {{ Str::startsWith(url()->current(), route('users.index')) ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ route('users.index') }}">
+                                    <i class="mdi mdi-account menu-icon"></i>
+                                    <span class="menu-title">User</span>
+                                </a>
+                            </li>
+
+                            <li
                                 class="nav-item {{ Str::startsWith(url()->current(), route('penerbit.index')) ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ route('penerbit.index') }}">
                                     <i class="mdi mdi-book-open-page-variant menu-icon"></i>

@@ -20,6 +20,7 @@ use App\Http\Controllers\SpkController;
 use App\Http\Controllers\SuratJalanController;
 use App\Http\Controllers\UkuranBukuController;
 use App\Http\Controllers\UkuranKertasController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -75,6 +76,8 @@ Route::middleware('auth')->group(function () {
 
     Route::post('stock-decrease', PenguranganStokController::class)
         ->name('stock-decrease.store');
+
+    Route::resource('users', UserController::class);
 });
 
 Auth::routes();
