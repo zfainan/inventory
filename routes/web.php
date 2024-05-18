@@ -84,6 +84,9 @@ Route::middleware('auth')->group(function () {
         ->name('stock-decrease.store');
 });
 
-Auth::routes();
+Auth::routes([
+    'register' => false, // Registration Routes...
+    'verify' => false, // Email Verification Routes...
+]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
