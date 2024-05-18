@@ -34,7 +34,7 @@ class CreateFinishedGoodTransaction implements ShouldQueue
             'id_buku' => $this->detailSpk->id_buku,
             'id_gudang' => Gudang::firstWhere('jenis', JenisGudang::GUDANG_HASIL->value)->id,
         ], [
-            'stok' => 0
+            'stok' => 0,
         ]);
 
         $transaction = new Transaction();

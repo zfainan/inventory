@@ -2,9 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Constants\JenisGudang;
 use App\Models\DetailSuratJalan;
-use App\Models\Gudang;
 use App\Models\Inventory;
 use App\Models\Transaction;
 use Illuminate\Bus\Queueable;

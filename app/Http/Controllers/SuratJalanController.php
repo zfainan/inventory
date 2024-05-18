@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class SuratJalanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:Petugas Gudang Retur');
+    }
+
     /**
      * Display a listing of the resource.
      */

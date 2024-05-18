@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Constants\JabatanEnum;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -33,6 +35,8 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $with = ['petugas'];
+
     /**
      * Get the attributes that should be cast.
      *
@@ -49,5 +53,26 @@ class User extends Authenticatable
     public function petugas(): BelongsTo
     {
         return $this->belongsTo(Petugas::class, 'id_petugas');
+    }
+
+    public function isPetugasGudangHasil(): Attribute
+    {
+        return Attribute::make(
+            fn () => $this->petugas->jabatan === JabatanEnum::PETUGAS_GUDANG_HASIL->value
+        );
+    }
+
+    public function isPetugasGudangRetur(): Attribute
+    {
+        return Attribute::make(
+            fn () => $this->petugas->jabatan === JabatanEnum::PETUGAS_GUDANG_RETUR->value
+        );
+    }
+
+    public function isManager(): Attribute
+    {
+        return Attribute::make(
+            fn () => $this->petugas->jabatan === JabatanEnum::MANAGER->value
+        );
     }
 }

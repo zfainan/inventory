@@ -34,7 +34,7 @@ class CreateReturTransaction implements ShouldQueue
             'id_buku' => $this->detailRetur->id_buku,
             'id_gudang' => Gudang::firstWhere('jenis', JenisGudang::GUDANG_RETUR->value)->id,
         ], [
-            'stok' => 0
+            'stok' => 0,
         ]);
 
         $transaction = new Transaction();

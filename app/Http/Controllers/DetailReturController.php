@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\DB;
 
 class DetailReturController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:Petugas Gudang Retur');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -63,7 +68,7 @@ class DetailReturController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
 
-            return redirect()->back()->with('status', 'Gagal tambah data! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Gagal tambah data! '.$th->getMessage());
         }
     }
 

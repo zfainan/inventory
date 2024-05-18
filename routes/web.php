@@ -29,6 +29,7 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->group(function () {
+    // Petugas Gudang Hasil
     Route::resource('spk', SpkController::class);
 
     Route::resource('buku', BukuController::class);
@@ -40,9 +41,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('finished-goods', FinishedGoodController::class)
         ->except(['show']);
 
-    Route::resource('surat-jalan', SuratJalanController::class);
-
-    Route::resource('surat-jalan.detail', DetailSuratJalanController::class);
+    Route::get('finished-goods/{buku}', [FinishedGoodController::class, 'show'])
+        ->name('finished-goods.show');
 
     Route::resource('ukuran-buku', UkuranBukuController::class);
 
@@ -59,8 +59,12 @@ Route::middleware('auth')->group(function () {
             'ukuran-kertas' => 'ukuran_kertas',
         ]);
 
-    Route::get('finished-goods/{buku}', [FinishedGoodController::class, 'show'])
-        ->name('finished-goods.show');
+    Route::resource('inventory-hasil', InventoryGudangHasilController::class);
+
+    // Petugas Gudang Retur
+    Route::resource('surat-jalan', SuratJalanController::class);
+
+    Route::resource('surat-jalan.detail', DetailSuratJalanController::class);
 
     Route::resource('retur', ReturController::class);
 
@@ -70,14 +74,14 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('nota-perbaikan.detail', DetailNotaPerbaikanController::class);
 
-    Route::resource('inventory-hasil', InventoryGudangHasilController::class);
-
     Route::resource('inventory-retur', InventoryGudangReturController::class);
 
+    // Manager
+    Route::resource('users', UserController::class);
+
+    // TODO: pengurangan stok pada inventory gudang retur
     Route::post('stock-decrease', PenguranganStokController::class)
         ->name('stock-decrease.store');
-
-    Route::resource('users', UserController::class);
 });
 
 Auth::routes();

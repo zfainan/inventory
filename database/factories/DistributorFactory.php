@@ -17,7 +17,7 @@ class DistributorFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama' => fake()->company()
+            'nama' => fake()->company(),
         ];
     }
 }

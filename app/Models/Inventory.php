@@ -17,14 +17,14 @@ class Inventory extends Model
 
     public function scopeGudangHasil(Builder $query): void
     {
-        $query->whereHas('gudang', function(Builder $q) {
+        $query->whereHas('gudang', function (Builder $q) {
             $q->where('jenis', JenisGudang::GUDANG_HASIL->value);
         });
     }
 
     public function scopeGudangRetur(Builder $query): void
     {
-        $query->whereHas('gudang', function(Builder $q) {
+        $query->whereHas('gudang', function (Builder $q) {
             $q->where('jenis', JenisGudang::GUDANG_RETUR->value);
         });
     }

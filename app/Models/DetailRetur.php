@@ -20,7 +20,7 @@ class DetailRetur extends Model
     {
         parent::boot();
 
-        static::created(function(self $detailRetur) {
+        static::created(function (self $detailRetur) {
             dispatch(new CreateReturTransaction($detailRetur));
         });
     }

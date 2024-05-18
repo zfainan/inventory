@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\DB;
 
 class DetailNotaPerbaikanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:Petugas Gudang Retur');
+    }
+
     /**
      * Display a listing of the resource.
      */

@@ -22,7 +22,7 @@ class DetailNotaPerbaikan extends Model
     {
         parent::boot();
 
-        static::created(function(self $detailNp) {
+        static::created(function (self $detailNp) {
             $inventory = Inventory::where('id_buku', $detailNp->detaiRetur->id_buku)
                 ->where('id_gudang', Gudang::firstWhere('jenis', JenisGudang::GUDANG_RETUR->value)->id)
                 ->firstOrFail();

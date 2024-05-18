@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class DistributorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:Petugas Gudang Hasil');
+    }
+
     /**
      * Display a listing of the resource.
      */

@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class KertasIsiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:Petugas Gudang Hasil');
+    }
+
     /**
      * Display a listing of the resource.
      */

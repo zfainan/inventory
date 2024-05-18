@@ -44,10 +44,10 @@ class Transaction extends Model
         }
 
         if ($this->transactionable instanceof BarangKeluar) {
-            $desc = 'Pengurangan stok: ' . $this->transactionable->deskripsi;
+            $desc = 'Pengurangan stok: '.$this->transactionable->deskripsi;
         }
 
-        return Attribute::make(get: fn() => $desc);
+        return Attribute::make(get: fn () => $desc);
     }
 
     public function transactionable(): MorphTo

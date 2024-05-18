@@ -18,7 +18,7 @@ class BukuSeeder extends Seeder
         $penerbit = Penerbit::all();
 
         Buku::factory(20)->create([
-            'id_penerbit' => $penerbit->random()->id
+            'id_penerbit' => $penerbit->random()->id,
         ]);
     }
 }

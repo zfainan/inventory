@@ -12,6 +12,11 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:Manager');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -22,7 +27,7 @@ class UserController extends Controller
 
         return view('user.index', [
             'data' => $data,
-            'jabatan' => $jabatan
+            'jabatan' => $jabatan,
         ]);
     }
 

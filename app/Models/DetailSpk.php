@@ -20,7 +20,7 @@ class DetailSpk extends Model
     {
         parent::boot();
 
-        static::created(function(self $detailSpk) {
+        static::created(function (self $detailSpk) {
             dispatch(new CreateFinishedGoodTransaction($detailSpk));
         });
     }

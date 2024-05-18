@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class InventoryGudangReturController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:Petugas Gudang Retur');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -17,7 +22,7 @@ class InventoryGudangReturController extends Controller
         $data = Inventory::gudangRetur()->with('buku')->latest()->paginate();
 
         return view('inventory.retur.index', [
-            'data' => $data
+            'data' => $data,
         ]);
     }
 

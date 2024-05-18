@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\DB;
 
 class DetailSuratJalanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:Petugas Gudang Retur');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -66,7 +71,7 @@ class DetailSuratJalanController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
 
-            return redirect()->back()->with('status', 'Tambah data gagal! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Tambah data gagal! '.$th->getMessage());
         }
     }
 

@@ -19,8 +19,8 @@ class Buku extends Model
 
     public function scopeGudangHasil(Builder $query): void
     {
-        $query->whereHas('inventories', function(Builder $qInventory) {
-            $qInventory->whereHas('gudang', function(Builder $qGudang) {
+        $query->whereHas('inventories', function (Builder $qInventory) {
+            $qInventory->whereHas('gudang', function (Builder $qGudang) {
                 $qGudang->where('jenis', JenisGudang::GUDANG_HASIL->value);
             });
         });
