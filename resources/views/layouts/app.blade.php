@@ -138,75 +138,78 @@
                                     </li>
                                 @endif
 
-                                <li
-                                    class="nav-item {{ Str::startsWith(url()->current(), route('surat-jalan.index')) || Str::startsWith(url()->current(), route('nota-perbaikan.index')) || Str::startsWith(url()->current(), route('spk.index')) ? 'active' : '' }}">
-                                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
-                                        aria-controls="ui-basic">
-                                        <i class="menu-icon mdi mdi-book-open"></i>
-                                        <span class="menu-title">Documents</span>
-                                        <i class="menu-arrow"></i>
-                                    </a>
-                                    <div class="collapse  {{ Str::startsWith(url()->current(), route('surat-jalan.index')) || Str::startsWith(url()->current(), route('nota-perbaikan.index')) || Str::startsWith(url()->current(), route('spk.index')) ? 'show' : '' }}"
-                                        id="ui-basic">
-                                        <ul class="nav flex-column sub-menu">
+                                @if (!auth()->user()->isManager)
+                                    <li
+                                        class="nav-item {{ Str::startsWith(url()->current(), route('surat-jalan.index')) || Str::startsWith(url()->current(), route('nota-perbaikan.index')) || Str::startsWith(url()->current(), route('spk.index')) ? 'active' : '' }}">
+                                        <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic"
+                                            aria-expanded="false" aria-controls="ui-basic">
+                                            <i class="menu-icon mdi mdi-book-open"></i>
+                                            <span class="menu-title">Documents</span>
+                                            <i class="menu-arrow"></i>
+                                        </a>
+                                        <div class="collapse  {{ Str::startsWith(url()->current(), route('surat-jalan.index')) || Str::startsWith(url()->current(), route('nota-perbaikan.index')) || Str::startsWith(url()->current(), route('spk.index')) ? 'show' : '' }}"
+                                            id="ui-basic">
+                                            <ul class="nav flex-column sub-menu">
 
-                                            @if (auth()->user()->isPetugasGudangHasil)
-                                                <li
-                                                    class="nav-item {{ Str::startsWith(url()->current(), route('spk.index')) ? 'active' : '' }}">
-                                                    <a class="nav-link" href="{{ route('spk.index') }}">SPK</a>
-                                                </li>
-                                            @endif
+                                                @if (auth()->user()->isPetugasGudangHasil)
+                                                    <li
+                                                        class="nav-item {{ Str::startsWith(url()->current(), route('spk.index')) ? 'active' : '' }}">
+                                                        <a class="nav-link" href="{{ route('spk.index') }}">SPK</a>
+                                                    </li>
+                                                @endif
 
-                                            @if (auth()->user()->isPetugasGudangRetur)
-                                                <li
-                                                    class="nav-item {{ Str::startsWith(url()->current(), route('surat-jalan.index')) ? 'active' : '' }}">
-                                                    <a class="nav-link" href="{{ route('surat-jalan.index') }}">Surat
-                                                        Jalan</a>
-                                                </li>
-                                                <li
-                                                    class="nav-item {{ Str::startsWith(url()->current(), route('nota-perbaikan.index')) ? 'active' : '' }}">
-                                                    <a class="nav-link" href="{{ route('nota-perbaikan.index') }}">Nota
-                                                        Perbaikan</a>
-                                                </li>
-                                            @endif
+                                                @if (auth()->user()->isPetugasGudangRetur)
+                                                    <li
+                                                        class="nav-item {{ Str::startsWith(url()->current(), route('surat-jalan.index')) ? 'active' : '' }}">
+                                                        <a class="nav-link" href="{{ route('surat-jalan.index') }}">Surat
+                                                            Jalan</a>
+                                                    </li>
+                                                    <li
+                                                        class="nav-item {{ Str::startsWith(url()->current(), route('nota-perbaikan.index')) ? 'active' : '' }}">
+                                                        <a class="nav-link"
+                                                            href="{{ route('nota-perbaikan.index') }}">Nota
+                                                            Perbaikan</a>
+                                                    </li>
+                                                @endif
 
-                                        </ul>
-                                    </div>
-                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
 
-                                <li
-                                    class="nav-item {{ Str::startsWith(url()->current(), route('inventory-hasil.index')) || Str::startsWith(url()->current(), route('inventory-retur.index')) ? 'active' : '' }}">
-                                    <a class="nav-link" data-bs-toggle="collapse" href="#inventory-dd"
-                                        aria-expanded="false" aria-controls="inventory-dd">
-                                        <i class="menu-icon mdi mdi-package"></i>
-                                        <span class="menu-title">Inventories</span>
-                                        <i class="menu-arrow"></i>
-                                    </a>
-                                    <div class="collapse  {{ Str::startsWith(url()->current(), route('inventory-hasil.index')) || Str::startsWith(url()->current(), route('inventory-retur.index')) ? 'show' : '' }}"
-                                        id="inventory-dd">
-                                        <ul class="nav flex-column sub-menu">
+                                    <li
+                                        class="nav-item {{ Str::startsWith(url()->current(), route('inventory-hasil.index')) || Str::startsWith(url()->current(), route('inventory-retur.index')) ? 'active' : '' }}">
+                                        <a class="nav-link" data-bs-toggle="collapse" href="#inventory-dd"
+                                            aria-expanded="false" aria-controls="inventory-dd">
+                                            <i class="menu-icon mdi mdi-package"></i>
+                                            <span class="menu-title">Inventories</span>
+                                            <i class="menu-arrow"></i>
+                                        </a>
+                                        <div class="collapse  {{ Str::startsWith(url()->current(), route('inventory-hasil.index')) || Str::startsWith(url()->current(), route('inventory-retur.index')) ? 'show' : '' }}"
+                                            id="inventory-dd">
+                                            <ul class="nav flex-column sub-menu">
 
-                                            @if (auth()->user()->isPetugasGudangHasil)
-                                                <li
-                                                    class="nav-item {{ Str::startsWith(url()->current(), route('inventory-hasil.index')) ? 'active' : '' }}">
-                                                    <a class="nav-link"
-                                                        href="{{ route('inventory-hasil.index') }}">Gudang
-                                                        Hasil</a>
-                                                </li>
-                                            @endif
+                                                @if (auth()->user()->isPetugasGudangHasil)
+                                                    <li
+                                                        class="nav-item {{ Str::startsWith(url()->current(), route('inventory-hasil.index')) ? 'active' : '' }}">
+                                                        <a class="nav-link"
+                                                            href="{{ route('inventory-hasil.index') }}">Gudang
+                                                            Hasil</a>
+                                                    </li>
+                                                @endif
 
-                                            @if (auth()->user()->isPetugasGudangRetur)
-                                                <li
-                                                    class="nav-item {{ Str::startsWith(url()->current(), route('inventory-retur.index')) ? 'active' : '' }}">
-                                                    <a class="nav-link"
-                                                        href="{{ route('inventory-retur.index') }}">Gudang
-                                                        Retur</a>
-                                                </li>
-                                            @endif
+                                                @if (auth()->user()->isPetugasGudangRetur)
+                                                    <li
+                                                        class="nav-item {{ Str::startsWith(url()->current(), route('inventory-retur.index')) ? 'active' : '' }}">
+                                                        <a class="nav-link"
+                                                            href="{{ route('inventory-retur.index') }}">Gudang
+                                                            Retur</a>
+                                                    </li>
+                                                @endif
 
-                                        </ul>
-                                    </div>
-                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                @endif
 
                                 @if (!auth()->user()->isPetugasGudangRetur)
                                     <li class="nav-item nav-category">Master Data</li>
