@@ -107,7 +107,6 @@ class UserController extends Controller
     {
         try {
             $user->delete();
-            $user->petugas->delete();
 
             return redirect(route('users.index'))->with('status', 'Berhasil hapus akun!');
         } catch (\Throwable $th) {
