@@ -50,7 +50,7 @@ class PenguranganStokGudangReturController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
 
-            return redirect()->back()->with('status', 'Gagal mengurangi stok! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Gagal mengurangi stok! '.$th->getMessage());
         }
     }
 }
