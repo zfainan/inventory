@@ -32,6 +32,10 @@ Route::middleware('auth')->group(function () {
     // Petugas Gudang Hasil
     Route::resource('spk', SpkController::class);
 
+    Route::resource('surat-jalan', SuratJalanController::class);
+
+    Route::resource('surat-jalan.detail', DetailSuratJalanController::class);
+
     Route::resource('buku', BukuController::class);
 
     Route::resource('penerbit', PenerbitController::class);
@@ -62,10 +66,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('inventory-hasil', InventoryGudangHasilController::class);
 
     // Petugas Gudang Retur
-    Route::resource('surat-jalan', SuratJalanController::class);
-
-    Route::resource('surat-jalan.detail', DetailSuratJalanController::class);
-
     Route::resource('retur', ReturController::class);
 
     Route::resource('retur.detail', DetailReturController::class);

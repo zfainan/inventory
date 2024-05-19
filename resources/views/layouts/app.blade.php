@@ -156,14 +156,14 @@
                                                         class="nav-item {{ Str::startsWith(url()->current(), route('spk.index')) ? 'active' : '' }}">
                                                         <a class="nav-link" href="{{ route('spk.index') }}">SPK</a>
                                                     </li>
-                                                @endif
-
-                                                @if (auth()->user()->isPetugasGudangRetur)
                                                     <li
                                                         class="nav-item {{ Str::startsWith(url()->current(), route('surat-jalan.index')) ? 'active' : '' }}">
                                                         <a class="nav-link" href="{{ route('surat-jalan.index') }}">Surat
                                                             Jalan</a>
                                                     </li>
+                                                @endif
+
+                                                @if (auth()->user()->isPetugasGudangRetur)
                                                     <li
                                                         class="nav-item {{ Str::startsWith(url()->current(), route('nota-perbaikan.index')) ? 'active' : '' }}">
                                                         <a class="nav-link"
