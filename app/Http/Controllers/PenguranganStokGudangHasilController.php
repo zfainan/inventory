@@ -9,7 +9,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class PenguranganStokController extends Controller
+class PenguranganStokGudangHasilController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -25,10 +25,10 @@ class PenguranganStokController extends Controller
         try {
             DB::beginTransaction();
 
-            $inventory = Inventory::findOrFail($request->id_inventory);
+            $inventory = Inventory::gudangHasil()->findOrFail($request->id_inventory);
 
             if ($inventory->stok < $request->qty) {
-                throw new Exception("Stok buku kurang dari {$request->qty}"); // NOSONAR
+                throw new Exception("Stok buku kurang dari {$request->qty}."); // NOSONAR
             }
 
             $barangKeluar = BarangKeluar::create([

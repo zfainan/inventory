@@ -72,7 +72,7 @@
     <!-- Modal -->
     <div class="modal fade" id="add" tabindex="-1" aria-labelledby="addLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form class="modal-content" action="{{ route('stock-decrease.store') }}" method="POST">
+            <form class="modal-content" action="{{ route('inventory-hasil.stock-decrease.store') }}" method="POST">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="addLabel">Pengurangan stok</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

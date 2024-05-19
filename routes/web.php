@@ -14,7 +14,8 @@ use App\Http\Controllers\InventoryGudangReturController;
 use App\Http\Controllers\KertasIsiController;
 use App\Http\Controllers\NotaPerbaikanController;
 use App\Http\Controllers\PenerbitController;
-use App\Http\Controllers\PenguranganStokController;
+use App\Http\Controllers\PenguranganStokGudangHasilController;
+use App\Http\Controllers\PenguranganStokGudangReturController;
 use App\Http\Controllers\ReturController;
 use App\Http\Controllers\SpkController;
 use App\Http\Controllers\SuratJalanController;
@@ -65,6 +66,9 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('inventory-hasil', InventoryGudangHasilController::class);
 
+    Route::post('inventory-hasil/stock-decrease', PenguranganStokGudangHasilController::class)
+        ->name('inventory-hasil.stock-decrease.store');
+
     // Petugas Gudang Retur
     Route::resource('retur', ReturController::class);
 
@@ -76,12 +80,11 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('inventory-retur', InventoryGudangReturController::class);
 
+    Route::post('inventory-retur/stock-decrease', PenguranganStokGudangReturController::class)
+        ->name('inventory-retur.stock-decrease.store');
+
     // Manager
     Route::resource('users', UserController::class);
-
-    // TODO: pengurangan stok pada inventory gudang retur
-    Route::post('stock-decrease', PenguranganStokController::class)
-        ->name('stock-decrease.store');
 });
 
 Auth::routes([
