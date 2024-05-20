@@ -16,21 +16,21 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::create([
-            'name' => 'Petugas Gudang Hasil',
+            'name' => Petugas::firstWhere('jabatan', JabatanEnum::PETUGAS_GUDANG_HASIL->value)->nama_petugas,
             'email' => 'hasil@example.com',
             'password' => Hash::make('password'),
             'id_petugas' => Petugas::firstWhere('jabatan', JabatanEnum::PETUGAS_GUDANG_HASIL->value)->id,
         ]);
 
         User::create([
-            'name' => 'Petugas Gudang Retur',
+            'name' => Petugas::firstWhere('jabatan', JabatanEnum::PETUGAS_GUDANG_RETUR->value)->nama_petugas,
             'email' => 'retur@example.com',
             'password' => Hash::make('password'),
             'id_petugas' => Petugas::firstWhere('jabatan', JabatanEnum::PETUGAS_GUDANG_RETUR->value)->id,
         ]);
 
         User::create([
-            'name' => 'Manager',
+            'name' => Petugas::firstWhere('jabatan', JabatanEnum::MANAGER->value)->nama_petugas,
             'email' => 'manager@example.com',
             'password' => Hash::make('password'),
             'id_petugas' => Petugas::firstWhere('jabatan', JabatanEnum::MANAGER->value)->id,

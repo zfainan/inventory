@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <h3 class="my-auto">Welcome Bruhh...</h3>
+        <h3 class="my-auto">Welcome {{ auth()->user()->petugas->nama_petugas }}</h3>
 
         <div class="row mt-4 mb-5">
             <div class="col-md-6">

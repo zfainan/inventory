@@ -70,7 +70,7 @@
                                 <li class="nav-item dropdown d-none d-lg-block user-dropdown">
                                     <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown"
                                         aria-expanded="false">
-                                        {{ Auth::user()->name }}
+                                        {{ Auth::user()->petugas->jabatan }}
                                         <img class="img-xs rounded-circle ms-3" src="/assets/images/faces/face8.jpg"
                                             alt="" alt="Profile image"> </a>
                                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
@@ -78,7 +78,7 @@
                                         <div class="dropdown-header text-center">
                                             <img class="img-md rounded-circle" src="/assets/images/faces/face8.jpg"
                                                 alt="" alt="Menu profile image">
-                                            <p class="mb-1 mt-3 fw-semibold">{{ Auth::user()->name }}</p>
+                                            <p class="mb-1 mt-3 fw-semibold">{{ Auth::user()->petugas->nama_petugas }}</p>
                                             <p class="fw-light text-muted mb-0">{{ Auth::user()->email }}</p>
                                         </div>
                                         <a class="dropdown-item border-0" href="{{ route('logout') }}"
