@@ -24,6 +24,7 @@
                 <th scope="col">Tanggal Masuk</th>
                 <th scope="col">Tanggal Keluar</th>
                 <th scope="col">Buku</th>
+                <th scope="col">Jumlah Cetak (Oplah Dasar + insheet)</th>
             </tr>
         </thead>
         <tbody>
@@ -34,6 +35,7 @@
                     <td>{{ $spk->tanggal_masuk }}</td>
                     <td>{{ $spk->tanggal_keluar }}</td>
                     <td>{{ $spk->buku?->judul }}</td>
+                    <td>{{ $spk->oplah_insheet }}</td>
                 </tr>
             @endforeach
         </tbody>

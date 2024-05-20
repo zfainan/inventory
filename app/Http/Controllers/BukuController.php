@@ -3,8 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Buku;
+use App\Models\CetakIsi;
+use App\Models\DetailMaterial;
+use App\Models\Finishing;
 use App\Models\Penerbit;
+use App\Models\UkuranBuku;
+use App\Models\UkuranKertas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BukuController extends Controller
 {
@@ -31,9 +37,17 @@ class BukuController extends Controller
     public function create()
     {
         $penerbit = Penerbit::all();
+        $ukuranKertas = UkuranKertas::with(['grammatur', 'kertasIsi'])->get();
+        $ukuranBuku = UkuranBuku::get();
+        $cetakIsi = CetakIsi::get();
+        $finishing = Finishing::get();
 
         return view('buku.create', [
             'penerbit' => $penerbit,
+            'ukuranKertas' => $ukuranKertas,
+            'ukuranBuku' => $ukuranBuku,
+            'cetakIsi' => $cetakIsi,
+            'finishing' => $finishing,
         ]);
     }
 
@@ -45,18 +59,46 @@ class BukuController extends Controller
         $request->validate([
             'judul' => 'required|string',
             'isbn' => 'nullable',
-            'id_penerbit' => 'required|exists:penerbit,id',
             'expired' => 'nullable|date',
+            'id_penerbit' => 'required|exists:penerbit,id',
+            'id_ukuran_kertas' => 'required|exists:ukuran_kertas,id',
+            'id_ukuran_buku' => 'required|exists:ukuran_buku,id',
+            'id_cetak_isi' => 'required|exists:cetak_isi,id',
+            'id_finishing' => 'required|string|max:255',
         ]);
 
-        Buku::create([
-            'judul' => $request->judul,
-            'id_penerbit' => $request->id_penerbit,
-            'isbn' => $request->isbn,
-            'expired' => $request->expired,
-        ]);
+        try {
+            DB::beginTransaction();
 
-        return redirect(route('buku.index'))->with('status', 'Berhasil input data buku!');
+            $buku = Buku::create([
+                'judul' => $request->judul,
+                'id_penerbit' => $request->id_penerbit,
+                'isbn' => $request->isbn,
+                'expired' => $request->expired,
+            ]);
+
+            $ukuranBuku = UkuranBuku::findOrFail($request->id_ukuran_buku);
+            $cetakIsi = CetakIsi::findOrFail($request->id_cetak_isi);
+            $finishing = Finishing::findOrFail($request->id_finishing);
+            $ukuranKertas = UkuranKertas::findOrFail($request->id_ukuran_kertas)
+                ->load(['grammatur', 'kertasIsi']);
+
+            $detailMaterial = new DetailMaterial();
+            $detailMaterial->buku()->associate($buku);
+            $detailMaterial->ukuranKertas()->associate($ukuranKertas);
+            $detailMaterial->ukuranBuku()->associate($ukuranBuku);
+            $detailMaterial->cetakIsi()->associate($cetakIsi);
+            $detailMaterial->finishing()->associate($finishing);
+            $detailMaterial->save();
+
+            DB::commit();
+
+            return redirect(route('buku.index'))->with('status', 'Berhasil input data buku!');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+
+            return redirect()->back()->with('status', 'Input data buku gagal! '.$th->getMessage());
+        }
     }
 
     /**

@@ -2,29 +2,61 @@
 
 @section('content')
     <h2 class="h4">Inventory Gudang Retur</h2>
-    <p>Stock log</p>
+    <h3>{{ $inventory->buku->judul }} - {{ $inventory->buku->penerbit->penerbit }}</h3>
 
     @session('status')
-        <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
+        <div class="alert alert-warning alert-dismissible fade show mt-4" role="alert">
             {{ $value }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endsession
 
-    <div class="row py-2 mt-3">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5>Buku</h5>
-                    <span>{{ $inventory->buku->judul }}</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
+    <div class="row mt-4">
+        <div class="col-md-4 my-2 px-2">
             <div class="card">
                 <div class="card-body">
                     <h5>Total Stok</h5>
                     <span>{{ $inventory->stok }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 my-2 px-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5>Ukuran Buku</h5>
+                    <span>{{ $inventory->buku?->detailMaterial?->ukuranBuku?->ukuran_buku }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 my-2 px-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5>Grammatur</h5>
+                    <span>{{ $inventory->buku?->detailMaterial?->ukuranKertas?->grammatur?->grammatur }} gr</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 my-2 px-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5>Kertas Isi</h5>
+                    <span>{{ $inventory->buku?->detailMaterial?->ukuranKertas?->kertasIsi?->kertas_isi }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 my-2 px-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5>Cetak Isi</h5>
+                    <span>{{ $inventory->buku?->detailMaterial?->cetakIsi?->cetak_isi }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 my-2 px-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5>Finishing</h5>
+                    <span>{{ $inventory->buku?->detailMaterial?->finishing?->finishing }}</span>
                 </div>
             </div>
         </div>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Constants\JenisGudang;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -40,7 +41,11 @@ class Transaction extends Model
         }
 
         if ($this->transactionable instanceof DetailNotaPerbaikan) {
-            $desc = 'Pengurangan stok dari nota perbaikan';
+            if ($this->inventory->gudang->jenis == JenisGudang::GUDANG_RETUR->value) {
+                $desc = 'Pengurangan stok dari nota perbaikan';
+            } else {
+                $desc = 'Penambahan stok dari nota perbaikan';
+            }
         }
 
         if ($this->transactionable instanceof BarangKeluar) {

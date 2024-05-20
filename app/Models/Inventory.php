@@ -15,6 +15,8 @@ class Inventory extends Model
 
     protected $fillable = ['id_gudang', 'id_buku', 'stok'];
 
+    protected $with = ['gudang'];
+
     public function scopeGudangHasil(Builder $query): void
     {
         $query->whereHas('gudang', function (Builder $q) {

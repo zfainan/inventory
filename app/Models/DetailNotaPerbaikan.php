@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Constants\JenisGudang;
 use App\Jobs\CreateNotaPerbaikanTransaction;
 use App\Traits\HasTransaction;
 use Exception;
@@ -23,8 +22,9 @@ class DetailNotaPerbaikan extends Model
         parent::boot();
 
         static::created(function (self $detailNp) {
-            $inventory = Inventory::where('id_buku', $detailNp->detaiRetur->id_buku)
-                ->where('id_gudang', Gudang::firstWhere('jenis', JenisGudang::GUDANG_RETUR->value)->id)
+            $inventory = Inventory::gudangRetur()
+                ->with('buku')
+                ->where('id_buku', $detailNp->detaiRetur->id_buku)
                 ->firstOrFail();
 
             if ($inventory->stok < $detailNp->qty) {

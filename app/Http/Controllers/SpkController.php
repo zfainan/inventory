@@ -3,12 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Buku;
-use App\Models\CetakIsi;
-use App\Models\DetailMaterial;
-use App\Models\Finishing;
 use App\Models\Spk;
-use App\Models\UkuranBuku;
-use App\Models\UkuranKertas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -24,7 +19,7 @@ class SpkController extends Controller
      */
     public function index()
     {
-        $data = Spk::with(['detailMaterial', 'buku.penerbit'])->latest()->paginate();
+        $data = Spk::with(['buku.penerbit'])->latest()->paginate();
 
         return view('spk.index', [
             'data' => $data,
@@ -37,17 +32,9 @@ class SpkController extends Controller
     public function create()
     {
         $books = Buku::get();
-        $ukuranKertas = UkuranKertas::with(['grammatur', 'kertasIsi'])->get();
-        $ukuranBuku = UkuranBuku::get();
-        $cetakIsi = CetakIsi::get();
-        $finishing = Finishing::get();
 
         return view('spk.create', [
             'books' => $books,
-            'ukuranKertas' => $ukuranKertas,
-            'ukuranBuku' => $ukuranBuku,
-            'cetakIsi' => $cetakIsi,
-            'finishing' => $finishing,
         ]);
     }
 
@@ -58,10 +45,6 @@ class SpkController extends Controller
     {
         $request->validate([
             'id_buku' => 'required|exists:buku,id',
-            'id_ukuran_kertas' => 'required|exists:ukuran_kertas,id',
-            'id_ukuran_buku' => 'required|exists:ukuran_buku,id',
-            'id_cetak_isi' => 'required|exists:cetak_isi,id',
-            'id_finishing' => 'required|string|max:255',
             'tanggal_masuk' => 'required|date',
             'tanggal_keluar' => 'required|date|after:tanggal_masuk',
             'oplah_dasar' => 'required|numeric|min:1',
@@ -71,8 +54,7 @@ class SpkController extends Controller
         try {
             DB::beginTransaction();
 
-            $spk = new Spk();
-            $spk->fill([
+            Spk::create([
                 'id_buku' => $request->id_buku,
                 'tanggal_masuk' => $request->tanggal_masuk,
                 'tanggal_keluar' => $request->tanggal_keluar,
@@ -80,22 +62,6 @@ class SpkController extends Controller
                 'oplah_insheet' => $request->oplah_insheet,
                 'nomor_spk' => sprintf('SPK-%d', (Spk::latest()->first()?->id ?? 0) + 1),
             ]);
-            $spk->save();
-            $spk->refresh();
-
-            $ukuranBuku = UkuranBuku::findOrFail($request->id_ukuran_buku);
-            $cetakIsi = CetakIsi::findOrFail($request->id_cetak_isi);
-            $finishing = Finishing::findOrFail($request->id_finishing);
-            $ukuranKertas = UkuranKertas::findOrFail($request->id_ukuran_kertas)
-                ?->load(['grammatur', 'kertasIsi']);
-
-            $detailMaterial = new DetailMaterial();
-            $detailMaterial->spk()->associate($spk);
-            $detailMaterial->ukuranKertas()->associate($ukuranKertas);
-            $detailMaterial->ukuranBuku()->associate($ukuranBuku);
-            $detailMaterial->cetakIsi()->associate($cetakIsi);
-            $detailMaterial->finishing()->associate($finishing);
-            $detailMaterial->save();
 
             DB::commit();
 

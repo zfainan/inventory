@@ -14,9 +14,9 @@ class DetailMaterial extends Model
 
     protected $guarded = ['id'];
 
-    public function spk(): BelongsTo
+    public function buku(): BelongsTo
     {
-        return $this->belongsTo(Spk::class, 'id_spk');
+        return $this->belongsTo(Buku::class, 'id_buku');
     }
 
     public function ukuranKertas(): BelongsTo
