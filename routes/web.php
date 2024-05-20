@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\CetakIsiController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DetailNotaPerbaikanController;
 use App\Http\Controllers\DetailReturController;
 use App\Http\Controllers\DetailSuratJalanController;
@@ -30,6 +31,8 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
     // Petugas Gudang Hasil
     Route::resource('spk', SpkController::class);
 
@@ -91,5 +94,3 @@ Auth::routes([
     'register' => false, // Registration Routes...
     'verify' => false, // Email Verification Routes...
 ]);
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

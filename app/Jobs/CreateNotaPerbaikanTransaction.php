@@ -19,7 +19,7 @@ class CreateNotaPerbaikanTransaction implements ShouldQueue
      * Create a new job instance.
      */
     public function __construct(
-        public DetailNotaPerbaikan $detailSj,
+        public DetailNotaPerbaikan $detailNp,
         public Inventory $inventory
     ) {
     }
@@ -31,8 +31,8 @@ class CreateNotaPerbaikanTransaction implements ShouldQueue
     {
         $transaction = new Transaction();
         $transaction->inventory()->associate($this->inventory);
-        $transaction->transactionable()->associate($this->detailSj);
-        $transaction->qty = (0 - $this->detailSj->qty);
+        $transaction->transactionable()->associate($this->detailNp);
+        $transaction->qty = (0 - $this->detailNp->qty);
         $transaction->save();
     }
 }

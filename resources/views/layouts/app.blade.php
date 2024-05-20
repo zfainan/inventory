@@ -111,8 +111,8 @@
                         <nav class="sidebar sidebar-offcanvas py-3" id="sidebar" aria-label="sidebar">
                             <ul class="nav">
                                 <li
-                                    class="nav-item {{ Str::startsWith(url()->current(), route('home')) ? 'active' : '' }}">
-                                    <a class="nav-link" href="{{ route('home') }}">
+                                    class="nav-item {{ Str::startsWith(url()->current(), route('dashboard')) ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('dashboard') }}">
                                         <i class="mdi mdi-grid-large menu-icon"></i>
                                         <span class="menu-title">Dashboard</span>
                                     </a>

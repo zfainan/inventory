@@ -28,11 +28,16 @@ class DetailNotaPerbaikan extends Model
                 ->firstOrFail();
 
             if ($inventory->stok < $detailNp->qty) {
-                throw new Exception("Stok buku kurang dari {$detailNp->qty}"); // NOSONAR
+                throw new Exception("Stok buku kurang dari {$detailNp->qty}."); // NOSONAR
             }
 
             dispatch(new CreateNotaPerbaikanTransaction($detailNp, $inventory));
         });
+    }
+
+    public function notaPerbaikan(): BelongsTo
+    {
+        return $this->belongsTo(NotaPerbaikan::class, 'id_nota_perbaikan');
     }
 
     public function detaiRetur(): BelongsTo
