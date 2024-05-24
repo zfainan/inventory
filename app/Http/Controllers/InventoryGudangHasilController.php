@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Constants\JenisGudang;
+use App\Models\DetailSpk;
 use App\Models\Inventory;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class InventoryGudangHasilController extends Controller
 {
@@ -56,7 +58,16 @@ class InventoryGudangHasilController extends Controller
             ->latest()
             ->paginate();
 
+        $spk = DetailSpk::with('spk')
+            ->whereHas('spk', function ($querySpk) use ($inventoryHasil) {
+                $querySpk->where('id_buku', $inventoryHasil->id_buku);
+            })
+            ->groupBy('id_spk')
+            ->select('id_spk', DB::raw('SUM(qty) as jumlah_hasil'))
+            ->get();
+
         return view('inventory.hasil.show', [
+            'spk' => $spk,
             'data' => $data,
             'inventory' => $inventoryHasil,
         ]);

@@ -11,11 +11,11 @@
         </div>
     @endsession
 
-    <div class="row mt-4">
+    <div class="row mt-4 px-2">
         <div class="col-md-4 my-2 px-2">
             <div class="card">
                 <div class="card-body">
-                    <h5>Total Stok</h5>
+                    <h5>Total Stok Saat Ini</h5>
                     <span>{{ $inventory->stok }}</span>
                 </div>
             </div>
@@ -59,6 +59,41 @@
                     <span>{{ $inventory->buku?->detailMaterial?->finishing?->finishing }}</span>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="card mt-3">
+        <div class="card-body">
+            <div class="d-flex">
+                <h4 class="my-auto">SPK</h4>
+            </div>
+
+            <table class="table mt-4">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nomor SPK</th>
+                        <th scope="col">Tanggal Masuk</th>
+                        <th scope="col">Tanggal Selesai</th>
+                        <th scope="col">Qty</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($spk as $detailSpk)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $detailSpk->spk->nomor_spk }}</td>
+                            <td>{{ $detailSpk->spk->tanggal_masuk }}</td>
+                            <td>{{ $detailSpk->spk->tanggal_keluar }}</td>
+                            <td>
+                                {{ $detailSpk->jumlah_hasil }}
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+
+            {{ $data->links() }}
         </div>
     </div>
 
