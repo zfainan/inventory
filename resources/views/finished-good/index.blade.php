@@ -16,28 +16,56 @@
         </div>
     @endsession
 
-    <table class="table mt-4">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Judul Buku</th>
-                <th scope="col">Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($data as $buku)
-                <tr>
-                    <th scope="row">{{ $loop->iteration }}</th>
-                    <td>{{ $buku->judul }}</td>
-                    <td>
-                        <a href="{{ route('finished-goods.show', $buku) }}"><span
-                            class="badge text-bg-light rounded-1"><i
-                                class="menu-icon mdi mdi-eye-outline"></i></span></a>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <div class="card mt-4">
+        <div class="card-body">
+            <form class="row">
+                <div class="col-12 col-xl-6 mb-3 ms-auto d-flex">
+                    <input type="text" name="keyword" class="form-control" value="{{ request()->input('keyword') }}"
+                        placeholder="Cari judul buku...">
+                    <button class="btn btn-primary ms-4" type="submit">Cari</button>
+                </div>
+            </form>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Judul Buku</th>
+                        <th scope="col">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($data as $buku)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $buku->judul }}</td>
+                            <td>
+                                <a href="{{ route('finished-goods.show', $buku) }}"><span
+                                        class="badge text-bg-light rounded-1"><i
+                                            class="menu-icon mdi mdi-eye-outline"></i></span></a>
+                            </td>
+                        </tr>
+                    @endforeach
+
+                    @if (count($data) < 1 && request()->has('keyword'))
+                        <tr>
+                            <td colspan="3">
+                                <p class="text-center">Buku tidak ditemukan.</p>
+                            </td>
+                        </tr>
+                    @endif
+
+                    @if (count($data) < 1 && !request()->has('keyword'))
+                        <tr>
+                            <td colspan="3">
+                                <p class="text-center">Belum ada hasil cetak</p>
+                            </td>
+                        </tr>
+                    @endif
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     {{ $data->links() }}
 @endsection

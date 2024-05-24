@@ -18,9 +18,16 @@ class FinishedGoodController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Buku::whereHas('hasilCetak')->latest()->paginate();
+        $query = Buku::whereHas('hasilCetak')->latest();
+
+        if ($request->has('keyword')) {
+            $keyword = $request->input('keyword');
+            $query->where('judul', 'like', "%{$keyword}%");
+        }
+
+        $data = $query->paginate();
 
         return view('finished-good.index', [
             'data' => $data,
@@ -79,9 +86,17 @@ class FinishedGoodController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Buku $buku)
+    public function show(Request $request, Buku $buku)
     {
-        $data = DetailSpk::with('spk')->where('id_buku', $buku->id)->latest()->paginate();
+        $query = DetailSpk::with('spk')->where('id_buku', $buku->id)->latest();
+
+        if ($request->has('since') && $request->has('until')) {
+            $query->whereBetween('tanggal', [
+                $request->since, $request->until,
+            ]);
+        }
+
+        $data = $query->paginate();
 
         return view('finished-good.show', [
             'data' => $data,
