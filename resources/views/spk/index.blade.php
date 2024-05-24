@@ -18,48 +18,79 @@
 
     <div class="card mt-4">
         <div class="card-body">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <form class="row mb-3">
-                <div class="col-6 col-xl-3 mb-3 ms-auto">
-                    <input type="date" name="since" class="form-control" value="{{ request()->input('since') }}">
+                <div class="col-6 col-xl-3 mb-3 d-flex">
+                    <p class="mx-auto my-3 me-3">since</p>
+                    <div>
+                        <input type="date" name="since" class="form-control" value="{{ request()->input('since') }}">
+                    </div>
                 </div>
-                <div class="col-1 d-flex p-0">
-                    <p class="mx-auto my-3">to</p>
+                <div class="col-6 col-xl-3 mb-3 d-flex">
+                    <p class="mx-auto my-3 me-3">until</p>
+                    <div>
+                        <input type="date" name="until" class="form-control" value="{{ request()->input('until') }}">
+                    </div>
                 </div>
-                <div class="col-6 col-xl-3 mb-3">
-                    <input type="date" name="until" class="form-control" value="{{ request()->input('until') }}">
-                </div>
-                <div class="col-12 col-xl-7 mb-3 ms-auto d-flex">
-                    <input type="text" name="keyword" class="form-control" value="{{ request()->input('keyword') }}"
-                        placeholder="Cari judul buku / nomor SPK...">
-                    <button class="btn btn-primary ms-4" type="submit">Cari</button>
-                    <a href="{{ route('spk.index') }}" class="btn btn-outline-dark ms-2">Reset</a>
+                <div class="col-12 col-xl-5 mb-3 ms-auto d-flex">
+                    <div>
+                        <input type="text" name="keyword" class="form-control" value="{{ request()->input('keyword') }}"
+                            placeholder="Judul buku / nomor SPK...">
+                    </div>
+                    <button class="btn btn-primary ms-4 my-auto" type="submit">Cari</button>
+                    <a href="{{ route('spk.index') }}" class="btn btn-outline-dark ms-2 my-auto">Reset</a>
                 </div>
             </form>
 
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nomor SPK</th>
-                        <th scope="col">Tanggal Masuk</th>
-                        <th scope="col">Tanggal Keluar</th>
-                        <th scope="col">Buku</th>
-                        <th scope="col">Jumlah Cetak (Oplah Dasar + insheet)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($data as $spk)
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $spk->nomor_spk }}</td>
-                            <td>{{ $spk->tanggal_masuk }}</td>
-                            <td>{{ $spk->tanggal_keluar }}</td>
-                            <td>{{ $spk->buku?->judul }}</td>
-                            <td>{{ $spk->oplah_insheet }}</td>
+                            <th scope="col">#</th>
+                            <th scope="col">Nomor SPK</th>
+                            <th scope="col">Tanggal Masuk</th>
+                            <th scope="col">Tanggal Keluar</th>
+                            <th scope="col">Buku</th>
+                            <th scope="col">Jumlah Cetak (Oplah Dasar + insheet)</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($data as $spk)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $spk->nomor_spk }}</td>
+                                <td>{{ $spk->tanggal_masuk }}</td>
+                                <td>{{ $spk->tanggal_keluar }}</td>
+                                <td>{{ $spk->buku?->judul }}</td>
+                                <td>{{ $spk->oplah_insheet }}</td>
+                            </tr>
+                        @endforeach
+
+                        @if (count($data) < 1 && request()->hasAny(['since', 'until', 'keyword']))
+                            <tr>
+                                <td colspan="6">
+                                    <p class="text-center">Data tidak ditemukan.</p>
+                                </td>
+                            </tr>
+                        @elseif (count($data) < 1 && !request()->hasAny(['since', 'until', 'keyword']))
+                            <tr>
+                                <td colspan="6">
+                                    <p class="text-center">Belum ada data.</p>
+                                </td>
+                            </tr>
+                        @endif
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 

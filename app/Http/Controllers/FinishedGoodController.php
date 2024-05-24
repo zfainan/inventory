@@ -22,7 +22,7 @@ class FinishedGoodController extends Controller
     {
         $query = Buku::whereHas('hasilCetak')->latest();
 
-        if ($request->has('keyword')) {
+        if ($request->filled('keyword')) {
             $keyword = $request->input('keyword');
             $query->where('judul', 'like', "%{$keyword}%");
         }
@@ -90,7 +90,7 @@ class FinishedGoodController extends Controller
     {
         $query = DetailSpk::with('spk')->where('id_buku', $buku->id)->latest();
 
-        if ($request->has('since') && $request->has('until')) {
+        if ($request->filled('since') && $request->filled('until')) {
             $query->whereBetween('tanggal', [
                 $request->since, $request->until,
             ]);

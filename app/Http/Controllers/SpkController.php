@@ -19,15 +19,30 @@ class SpkController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Spk::with(['buku.penerbit'])->latest();
+        $request->validate([
+            'since' => 'required_with:until|date',
+            'until' => 'required_with:since|date',
+            'keyword' => 'nullable',
+        ]);
 
-        if ($request->has('since') && $request->has('until')) {
+        $query = Spk::with(['buku.penerbit']);
+
+        if ($request->filled('since') && $request->filled('until')) {
             $query->whereBetween('tanggal_masuk', [
                 $request->since, $request->until,
             ]);
         }
 
-        $data = $query->paginate();
+        if ($request->filled('keyword')) {
+            $keyword = $request->input('keyword');
+
+            $query->whereHas('buku', function ($queryBuku) use ($keyword) {
+                $queryBuku->where('judul', 'like', "%$keyword%");
+            })
+                ->orWhere('nomor_spk', 'like', "%$keyword%");
+        }
+
+        $data = $query->latest()->paginate();
 
         return view('spk.index', [
             'data' => $data,
@@ -77,7 +92,7 @@ class SpkController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
 
-            return redirect()->back()->with('status', 'Input data SPK gagal! '.$th->getMessage());
+            return redirect()->back()->with('status', 'Input data SPK gagal! ' . $th->getMessage());
         }
     }
 
