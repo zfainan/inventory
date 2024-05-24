@@ -17,9 +17,17 @@ class SpkController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Spk::with(['buku.penerbit'])->latest()->paginate();
+        $query = Spk::with(['buku.penerbit'])->latest();
+
+        if ($request->has('since') && $request->has('until')) {
+            $query->whereBetween('tanggal_masuk', [
+                $request->since, $request->until,
+            ]);
+        }
+
+        $data = $query->paginate();
 
         return view('spk.index', [
             'data' => $data,

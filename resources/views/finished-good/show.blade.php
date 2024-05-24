@@ -23,6 +23,9 @@
                     <div class="col-4 ms-3 ms-auto">
                         <input type="date" name="since" class="form-control" value="{{ request()->input('since') }}">
                     </div>
+                    <div class="col-1 d-flex">
+                        <p class="m-auto">to</p>
+                    </div>
                     <div class="col-4 ms-3">
                         <input type="date" name="until" class="form-control" value="{{ request()->input('until') }}">
                     </div>
