@@ -31,6 +31,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Judul Buku</th>
+                        <th scope="col">Penerbit</th>
                         <th scope="col">Aksi</th>
                     </tr>
                 </thead>
@@ -39,6 +40,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $buku->judul }}</td>
+                            <td>{{ $buku->penerbit->penerbit }}</td>
                             <td>
                                 <a href="{{ route('finished-goods.show', $buku) }}"><span
                                         class="badge text-bg-light rounded-1"><i

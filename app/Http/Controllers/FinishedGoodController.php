@@ -20,7 +20,7 @@ class FinishedGoodController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Buku::whereHas('hasilCetak')->latest();
+        $query = Buku::with('penerbit')->whereHas('hasilCetak')->latest();
 
         if ($request->filled('keyword')) {
             $keyword = $request->input('keyword');

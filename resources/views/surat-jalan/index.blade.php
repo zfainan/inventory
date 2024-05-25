@@ -16,26 +16,51 @@
         </div>
     @endsession
 
-    <table class="table mt-4">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Tanggal</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($data as $sj)
-                <tr>
-                    <th scope="row">{{ $loop->iteration }}</th>
-                    <td>{{ $sj->tanggal }}</td>
-                    <td>
-                        <a href="{{ route('surat-jalan.detail.index', $sj) }}"><span class="badge text-bg-light rounded-1"><i class="menu-icon mdi mdi-eye-outline"></i></span></a>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <div class="card mt-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Tanggal</th>
+                            <th scope="col">Distributor</th>
+                            <th scope="col">Buku</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($data as $sj)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $sj->tanggal }}</td>
+                                <td>
+                                    <ul class="mb-0">
+                                        @foreach ($sj->detail as $detail)
+                                            <li>{{ $detail->distributor->nama }}</li>
+                                        @endforeach
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul class="mb-0">
+                                        @foreach ($sj->detail as $detail)
+                                            <li>{{ $detail->buku->judul }} - {{ $detail->qty }} Pcs</li>
+                                        @endforeach
+                                    </ul>
+                                </td>
+                                <td>
+                                    <a href="{{ route('surat-jalan.detail.index', $sj) }}"><span
+                                            class="badge text-bg-light rounded-1"><i
+                                                class="menu-icon mdi mdi-eye-outline"></i></span></a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
 
-    {{ $data->links() }}
+            {{ $data->links() }}
+        </div>
+    </div>
+
 @endsection

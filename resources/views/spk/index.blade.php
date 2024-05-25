@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-xl-5 mb-3 ms-auto d-flex">
-                    <div>
+                    <div class="ms-auto">
                         <input type="text" name="keyword" class="form-control" value="{{ request()->input('keyword') }}"
                             placeholder="Judul buku / nomor SPK...">
                     </div>

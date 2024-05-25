@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Buku;
 use App\Models\CetakIsi;
+use App\Models\DetailMaterial;
 use App\Models\Finishing;
 use App\Models\Grammatur;
 use App\Models\KertasIsi;
@@ -17,8 +19,6 @@ class DummySeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call([BukuSeeder::class, DistributorSeeder::class]);
-
         UkuranBuku::insert([
             ['ukuran_buku' => '14x20'],
             ['ukuran_buku' => '15x20'],
@@ -50,6 +50,18 @@ class DummySeeder extends Seeder
                 'ukuran' => fake()->randomFloat(2, 80, 90),
                 'id_grammatur' => $grammatur->id,
                 'id_kertas_isi' => KertasIsi::first()->id,
+            ]);
+        });
+
+        $this->call([BukuSeeder::class, DistributorSeeder::class]);
+
+        Buku::all()->each(function ($buku) {
+            DetailMaterial::create([
+                'id_buku' => $buku->id,
+                'id_ukuran_kertas' => UkuranKertas::all()->random()->id,
+                'id_ukuran_buku' => UkuranBuku::all()->random()->id,
+                'id_cetak_isi' => CetakIsi::all()->random()->id,
+                'id_finishing' => Finishing::all()->random()->id,
             ]);
         });
     }

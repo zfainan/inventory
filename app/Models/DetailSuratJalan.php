@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-use App\Constants\JenisGudang;
 use App\Jobs\CreateSuratJalanTransaction;
 use App\Traits\HasTransaction;
-use Exception;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use LogicException;
 
 class DetailSuratJalan extends Model
 {
@@ -24,12 +23,18 @@ class DetailSuratJalan extends Model
         parent::boot();
 
         static::created(function (self $detailSuratJalan) {
-            $inventory = Inventory::where('id_buku', $detailSuratJalan->id_buku)
-                ->where('id_gudang', Gudang::firstWhere('jenis', JenisGudang::GUDANG_HASIL->value)->id)
-                ->firstOrFail();
+            $detailSuratJalan->load('buku');
+
+            $inventory = Inventory::gudangHasil()
+                ->where('id_buku', $detailSuratJalan->id_buku)
+                ->first();
+
+            if (! $inventory?->id) {
+                throw new LogicException("Buku {$detailSuratJalan->buku->judul} tidak ada dalam inventory gudang hasil.");
+            }
 
             if ($inventory->stok < $detailSuratJalan->qty) {
-                throw new Exception("Stok buku kurang dari {$detailSuratJalan->qty}"); // NOSONAR
+                throw new LogicException("Stok buku {$detailSuratJalan->buku->judul} kurang dari {$detailSuratJalan->qty}");
             }
 
             dispatch(new CreateSuratJalanTransaction($detailSuratJalan, $inventory));
