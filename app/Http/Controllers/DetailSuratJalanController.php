@@ -21,7 +21,7 @@ class DetailSuratJalanController extends Controller
      */
     public function index(SuratJalan $suratJalan)
     {
-        $data = DetailSuratJalan::with(['buku', 'distributor'])
+        $data = DetailSuratJalan::with(['buku.penerbit', 'distributor'])
             ->where('id_surat_jalan', $suratJalan->id)
             ->latest()
             ->paginate();

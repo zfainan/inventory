@@ -31,28 +31,36 @@
         </div>
     @endif
 
-    <table class="table mt-4">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Buku</th>
-                <th scope="col">Distributor</th>
-                <th scope="col">Qty</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($data as $detailSuratJalan)
-                <tr>
-                    <th scope="row">{{ $loop->iteration }}</th>
-                    <td>{{ $detailSuratJalan->buku->judul }}</td>
-                    <td>{{ $detailSuratJalan->distributor->nama }}</td>
-                    <td>{{ $detailSuratJalan->qty }}</td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <div class="card mt-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Distributor</th>
+                            <th scope="col">Buku</th>
+                            <th scope="col">Penerbit</th>
+                            <th scope="col">Qty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($data as $detailSuratJalan)
+                            <tr>
+                                <th scope="row">{{ $loop->iteration }}</th>
+                                <td>{{ $detailSuratJalan->distributor->nama }}</td>
+                                <td>{{ $detailSuratJalan->buku->judul }}</td>
+                                <td>{{ $detailSuratJalan->buku->penerbit->penerbit }}</td>
+                                <td>{{ $detailSuratJalan->qty }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
 
-    {{ $data->links() }}
+            {{ $data->links() }}
+        </div>
+    </div>
 
     <!-- Modal Create data-->
     <div class="modal fade" id="create" tabindex="-1" aria-labelledby="createLabel" aria-hidden="true">

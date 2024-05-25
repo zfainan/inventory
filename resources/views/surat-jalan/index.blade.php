@@ -25,7 +25,6 @@
                             <th scope="col">#</th>
                             <th scope="col">Tanggal</th>
                             <th scope="col">Distributor</th>
-                            <th scope="col">Buku</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
@@ -37,14 +36,10 @@
                                 <td>
                                     <ul class="mb-0">
                                         @foreach ($sj->detail as $detail)
-                                            <li>{{ $detail->distributor->nama }}</li>
-                                        @endforeach
-                                    </ul>
-                                </td>
-                                <td>
-                                    <ul class="mb-0">
-                                        @foreach ($sj->detail as $detail)
-                                            <li>{{ $detail->buku->judul }} - {{ $detail->qty }} Pcs</li>
+                                            <li>
+                                                <strong>{{ $detail->distributor->nama }}</strong>:
+                                                {{ $detail->buku->judul }} - {{ $detail->qty }} Pcs
+                                            </li>
                                         @endforeach
                                     </ul>
                                 </td>
