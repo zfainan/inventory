@@ -47,6 +47,9 @@
                         <a href="{{ route('nota-perbaikan.detail.index', $np) }}"><span
                                 class="badge text-bg-light rounded-1"><i
                                     class="menu-icon mdi mdi-eye-outline"></i></span></a>
+                        <a target="_blank" href="{{ route('print.nota-perbaikan', $np) }}"><span
+                                class="badge text-bg-light rounded-1 ms-2"><i
+                                    class="menu-icon mdi mdi-printer"></i></span></a>
                     </td>
                 </tr>
             @endforeach

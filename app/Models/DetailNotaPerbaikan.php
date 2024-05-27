@@ -40,7 +40,7 @@ class DetailNotaPerbaikan extends Model
         return $this->belongsTo(NotaPerbaikan::class, 'id_nota_perbaikan');
     }
 
-    public function detaiRetur(): BelongsTo
+    public function detailRetur(): BelongsTo
     {
         return $this->belongsTo(DetailRetur::class, 'id_detail_retur');
     }

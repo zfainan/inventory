@@ -17,6 +17,7 @@ use App\Http\Controllers\NotaPerbaikanController;
 use App\Http\Controllers\PenerbitController;
 use App\Http\Controllers\PenguranganStokGudangHasilController;
 use App\Http\Controllers\PenguranganStokGudangReturController;
+use App\Http\Controllers\PrintController;
 use App\Http\Controllers\ReturController;
 use App\Http\Controllers\SpkController;
 use App\Http\Controllers\SuratJalanController;
@@ -88,6 +89,19 @@ Route::middleware('auth')->group(function () {
 
     // Manager
     Route::resource('users', UserController::class);
+
+    // Print
+    Route::get('print/surat-jalan/{surat_jalan}', [PrintController::class, 'suratJalan'])
+        ->name('print.surat-jalan');
+
+    Route::get('print/finished-goods/{detail_spk}', [PrintController::class, 'finishedGoods'])
+        ->name('print.finished-goods');
+
+    Route::get('print/retur/{retur}', [PrintController::class, 'retur'])
+        ->name('print.retur');
+
+    Route::get('print/nota-perbaikan/{nota_perbaikan}', [PrintController::class, 'notaPerbaikan'])
+        ->name('print.nota-perbaikan');
 });
 
 Auth::routes([

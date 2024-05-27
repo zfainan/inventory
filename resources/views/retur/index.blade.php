@@ -46,9 +46,10 @@
                     <td>{{ $retur->distributor->nama }}</td>
                     <td>{{ $retur->petugas->nama_petugas }}</td>
                     <td>
-                        <a href="{{ route('retur.detail.index', $retur) }}"><span
-                                class="badge text-bg-light rounded-1"><i
+                        <a href="{{ route('retur.detail.index', $retur) }}"><span class="badge text-bg-light rounded-1"><i
                                     class="menu-icon mdi mdi-eye-outline"></i></span></a>
+                        <a target="_blank" href="{{ route('print.retur', $retur) }}"><span class="badge text-bg-light rounded-1 ms-2"><i
+                                    class="menu-icon mdi mdi-printer"></i></span></a>
                     </td>
                 </tr>
             @endforeach

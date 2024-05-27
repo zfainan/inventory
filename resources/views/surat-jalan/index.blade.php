@@ -47,6 +47,9 @@
                                     <a href="{{ route('surat-jalan.detail.index', $sj) }}"><span
                                             class="badge text-bg-light rounded-1"><i
                                                 class="menu-icon mdi mdi-eye-outline"></i></span></a>
+                                    <a target="_blank" href="{{ route('print.surat-jalan', $sj) }}"><span
+                                            class="badge text-bg-light rounded-1 ms-2"><i
+                                                class="menu-icon mdi mdi-printer"></i></span></a>
                                 </td>
                             </tr>
                         @endforeach

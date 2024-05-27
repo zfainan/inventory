@@ -40,6 +40,7 @@
                         <th scope="col">No. SPK</th>
                         <th scope="col">Tanggal</th>
                         <th scope="col">Qty</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,6 +50,11 @@
                             <td>{{ $fg->spk->nomor_spk }}</td>
                             <td>{{ $fg->tanggal }}</td>
                             <td>{{ $fg->qty }}</td>
+                            <td>
+                                <a href="{{ route('print.finished-goods', $fg) }}"><span
+                                    class="badge text-bg-light rounded-1 ms-2"><i
+                                        class="menu-icon mdi mdi-printer"></i></span></a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
