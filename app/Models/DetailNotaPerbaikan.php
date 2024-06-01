@@ -24,7 +24,7 @@ class DetailNotaPerbaikan extends Model
         static::created(function (self $detailNp) {
             $inventory = Inventory::gudangRetur()
                 ->with('buku')
-                ->where('id_buku', $detailNp->detaiRetur->id_buku)
+                ->where('id_buku', $detailNp->detailRetur->id_buku)
                 ->firstOrFail();
 
             if ($inventory->stok < $detailNp->qty) {
