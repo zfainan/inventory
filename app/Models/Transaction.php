@@ -15,12 +15,25 @@ class Transaction extends Model
 
     protected $with = ['transactionable'];
 
+    protected $fillable = ['qty'];
+
     protected static function booted(): void
     {
         static::created(function (self $transaction) {
             $transaction->inventory->update([
                 'stok' => $transaction->inventory->stok + $transaction->qty,
             ]);
+        });
+
+        static::updating(function (self $transaction) {
+            if ($transaction->isDirty('qty')) {
+                $currentInventoryStock = $transaction->inventory->stok;
+                $beforeTransactionStock = $currentInventoryStock - ($transaction->getOriginal('qty'));
+
+                $transaction->inventory->update([
+                    'stok' => $beforeTransactionStock + $transaction->qty,
+                ]);
+            }
         });
     }
 
@@ -49,7 +62,7 @@ class Transaction extends Model
         }
 
         if ($this->transactionable instanceof BarangKeluar) {
-            $desc = 'Pengurangan stok: '.$this->transactionable->deskripsi;
+            $desc = 'Pengurangan stok: ' . $this->transactionable->deskripsi;
         }
 
         return Attribute::make(get: fn () => $desc);

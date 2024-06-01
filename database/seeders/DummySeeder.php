@@ -2,11 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Constants\JenisGudang;
 use App\Models\Buku;
 use App\Models\CetakIsi;
 use App\Models\DetailMaterial;
 use App\Models\Finishing;
 use App\Models\Grammatur;
+use App\Models\Gudang;
 use App\Models\KertasIsi;
 use App\Models\UkuranBuku;
 use App\Models\UkuranKertas;
@@ -19,6 +21,16 @@ class DummySeeder extends Seeder
      */
     public function run(): void
     {
+        Gudang::firstOrCreate(
+            ['jenis' => JenisGudang::GUDANG_HASIL->value],
+            ['nama' => fake()->city()]
+        );
+
+        Gudang::firstOrCreate(
+            ['jenis' => JenisGudang::GUDANG_RETUR->value],
+            ['nama' => fake()->city()]
+        );
+
         UkuranBuku::insert([
             ['ukuran_buku' => '14x20'],
             ['ukuran_buku' => '15x20'],

@@ -79,7 +79,7 @@ class FinishedGoodController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
 
-            return redirect()->back()->with('status', 'Input data gagal! '.$th->getMessage());
+            return redirect()->back()->with('status', 'Input data gagal! ' . $th->getMessage());
         }
     }
 
@@ -107,23 +107,57 @@ class FinishedGoodController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(DetailSpk $detailSpk)
+    public function edit(DetailSpk $finishedGood)
     {
-        //
+        $spk = Spk::with(['buku.penerbit'])->latest()->paginate();
+
+        return view('finished-good.edit', [
+            'spk' => $spk,
+            'detailSpk' => $finishedGood,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, DetailSpk $detailSpk)
+    public function update(Request $request, DetailSpk $finishedGood)
     {
-        //
+        $request->validate([
+            'id_spk' => 'exists:spk,id',
+            'tanggal' => 'required|date',
+            'qty' => 'required|numeric|min:0',
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            $spk = Spk::findOrFail($request->id_spk);
+            $stok = $spk->detailSpk?->sum('stok');
+
+            $finishedGood->fill([
+                'id_spk' => $request->id_spk,
+                'id_buku' => $spk->id_buku,
+                'qty' => $request->qty,
+                'tanggal' => $request->tanggal,
+                'stok' => $stok + $request->qty,
+            ]);
+            $finishedGood->save();
+
+            DB::commit();
+
+            return redirect(route('finished-goods.show', $finishedGood->id_buku))
+                ->with('status', 'Ubah data berhasil!');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+
+            return redirect()->back()->with('status', 'Ubah data gagal! ' . $th->getMessage());
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DetailSpk $detailSpk)
+    public function destroy(DetailSpk $finishedGood)
     {
         //
     }

@@ -52,8 +52,14 @@
                             <td>{{ $fg->qty }}</td>
                             <td>
                                 <a href="{{ route('print.finished-goods', $fg) }}"><span
-                                    class="badge text-bg-light rounded-1 ms-2"><i
-                                        class="menu-icon mdi mdi-printer"></i></span></a>
+                                        class="badge text-bg-light rounded-1 ms-2"><i
+                                            class="menu-icon mdi mdi-printer"></i></span></a>
+                                <a href="{{ route('finished-goods.edit', $fg) }}"><span
+                                        class="badge text-bg-warning rounded-1 ms-2"><i
+                                            class="menu-icon mdi mdi-pen"></i></span></a>
+                                <a href="#"><span
+                                        class="badge text-bg-danger rounded-1 ms-2"><i
+                                            class="menu-icon mdi mdi-delete-forever"></i></span></a>
                             </td>
                         </tr>
                     @endforeach

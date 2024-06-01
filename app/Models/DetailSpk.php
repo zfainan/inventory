@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Jobs\CreateFinishedGoodTransaction;
+use App\Jobs\UpdateFinishedGoodTransaction;
 use App\Traits\HasTransaction;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -22,6 +23,10 @@ class DetailSpk extends Model
 
         static::created(function (self $detailSpk) {
             dispatch(new CreateFinishedGoodTransaction($detailSpk));
+        });
+
+        static::updated(function (self $detailSpk) {
+            dispatch(new UpdateFinishedGoodTransaction($detailSpk));
         });
     }
 
