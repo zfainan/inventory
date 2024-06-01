@@ -4,8 +4,8 @@
     <div class="container-fluid">
         <h3 class="my-auto">Welcome {{ auth()->user()->petugas->nama_petugas }}</h3>
 
-        <div class="row mt-4 mb-5">
-            @if (auth()->user()->isManager || auth()->user()->isPetugasGudangHasil)
+        @if (!auth()->user()->isManager)
+            <div class="row mt-4 mb-5">
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
@@ -16,9 +16,7 @@
                         </div>
                     </div>
                 </div>
-            @endif
 
-            @if (auth()->user()->isManager || auth()->user()->isPetugasGudangRetur)
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
@@ -29,8 +27,8 @@
                         </div>
                     </div>
                 </div>
-            @endif
-        </div>
+            </div>
+        @endif
 
         <div class="row mb-4">
             <div class="col-auto my-auto">
