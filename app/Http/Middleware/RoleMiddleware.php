@@ -15,10 +15,11 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next, string $role): Response
     {
-        $roles = explode(',', $role);
+        $roles = explode('|', $role);
 
         $jabatan = auth()->user()->petugas->jabatan;
         $granted = false;
+        info($role);
 
         foreach ($roles as $value) {
             if ($jabatan === $value) {

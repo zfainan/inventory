@@ -3,11 +3,13 @@
 @section('content')
     <h2 class="h4">Hasil Cetak Buku {{ $buku->judul }}</h2>
 
-    <div class="d-flex">
-        <div class="ms-auto">
-            <a href="{{ route('finished-goods.create') }}" class="btn btn-primary">Tambah hasil cetak</a>
+    @if (auth()->user()->isPetugasGudangHasil)
+        <div class="d-flex">
+            <div class="ms-auto">
+                <a href="{{ route('finished-goods.create') }}" class="btn btn-primary">Tambah hasil cetak</a>
+            </div>
         </div>
-    </div>
+    @endif
 
     @session('status')
         <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
@@ -54,12 +56,13 @@
                                 <a href="{{ route('print.finished-goods', $fg) }}"><span
                                         class="badge text-bg-light rounded-1 ms-2"><i
                                             class="menu-icon mdi mdi-printer"></i></span></a>
-                                <a href="{{ route('finished-goods.edit', $fg) }}"><span
-                                        class="badge text-bg-warning rounded-1 ms-2"><i
-                                            class="menu-icon mdi mdi-pen"></i></span></a>
-                                <a href="#"><span
-                                        class="badge text-bg-danger rounded-1 ms-2"><i
-                                            class="menu-icon mdi mdi-delete-forever"></i></span></a>
+                                @if (auth()->user()->isPetugasGudangHasil)
+                                    <a href="{{ route('finished-goods.edit', $fg) }}"><span
+                                            class="badge text-bg-warning rounded-1 ms-2"><i
+                                                class="menu-icon mdi mdi-pen"></i></span></a>
+                                    <a href="#"><span class="badge text-bg-danger rounded-1 ms-2"><i
+                                                class="menu-icon mdi mdi-delete-forever"></i></span></a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

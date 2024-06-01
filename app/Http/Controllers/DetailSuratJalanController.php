@@ -13,7 +13,9 @@ class DetailSuratJalanController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('role:Petugas Gudang Hasil');
+        $this->middleware('role:Petugas Gudang Hasil')->except(['index']);
+        $this->middleware('role:Petugas Gudang Hasil|Manager')
+            ->only(['index']);
     }
 
     /**

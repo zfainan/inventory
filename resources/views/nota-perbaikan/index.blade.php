@@ -3,12 +3,14 @@
 @section('content')
     <h2 class="h4">Data Nota Perbaikan</h2>
 
-    <div class="d-flex">
-        <div class="ms-auto">
-            <a href="{{ route('nota-perbaikan.create') }}" class="btn btn-primary" data-bs-toggle="modal"
-                data-bs-target="#createNotaPerbaikan">Tambah Nota Perbaikan</a>
+    @if (auth()->user()->isPetugasGudangRetur)
+        <div class="d-flex">
+            <div class="ms-auto">
+                <a href="{{ route('nota-perbaikan.create') }}" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#createNotaPerbaikan">Tambah Nota Perbaikan</a>
+            </div>
         </div>
-    </div>
+    @endif
 
     @session('status')
         <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">

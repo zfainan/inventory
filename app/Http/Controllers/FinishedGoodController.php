@@ -12,7 +12,11 @@ class FinishedGoodController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('role:Petugas Gudang Hasil');
+        $this->middleware('role:Petugas Gudang Hasil')
+            ->except(['index', 'show']);
+
+        $this->middleware('role:Petugas Gudang Hasil|Manager')
+            ->only(['index', 'show']);
     }
 
     /**

@@ -3,11 +3,13 @@
 @section('content')
     <h2 class="h4">Surat Jalan</h2>
 
-    <div class="d-flex">
-        <div class="ms-auto">
-            <a href="{{ route('surat-jalan.create') }}" class="btn btn-primary">Tambah surat jalan</a>
+    @if (auth()->user()->isPetugasGudangHasil)
+        <div class="d-flex">
+            <div class="ms-auto">
+                <a href="{{ route('surat-jalan.create') }}" class="btn btn-primary">Tambah surat jalan</a>
+            </div>
         </div>
-    </div>
+    @endif
 
     @session('status')
         <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">

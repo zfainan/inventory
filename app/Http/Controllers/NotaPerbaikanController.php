@@ -10,7 +10,8 @@ class NotaPerbaikanController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('role:Petugas Gudang Retur');
+        $this->middleware('role:Petugas Gudang Retur')->except(['index']);
+        $this->middleware('role:Petugas Gudang Retur|Manager')->only(['index']);
     }
 
     /**

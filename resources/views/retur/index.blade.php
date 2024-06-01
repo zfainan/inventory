@@ -3,12 +3,14 @@
 @section('content')
     <h2 class="h4">Data Retur</h2>
 
-    <div class="d-flex">
-        <div class="ms-auto">
-            <a href="{{ route('buku.create') }}" class="btn btn-primary" data-bs-toggle="modal"
-                data-bs-target="#createRetur">Tambah Retur</a>
+    @if (auth()->user()->isPetugasGudangRetur)
+        <div class="d-flex">
+            <div class="ms-auto">
+                <a href="{{ route('buku.create') }}" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#createRetur">Tambah Retur</a>
+            </div>
         </div>
-    </div>
+    @endif
 
     @session('status')
         <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
@@ -48,7 +50,8 @@
                     <td>
                         <a href="{{ route('retur.detail.index', $retur) }}"><span class="badge text-bg-light rounded-1"><i
                                     class="menu-icon mdi mdi-eye-outline"></i></span></a>
-                        <a target="_blank" href="{{ route('print.retur', $retur) }}"><span class="badge text-bg-light rounded-1 ms-2"><i
+                        <a target="_blank" href="{{ route('print.retur', $retur) }}"><span
+                                class="badge text-bg-light rounded-1 ms-2"><i
                                     class="menu-icon mdi mdi-printer"></i></span></a>
                     </td>
                 </tr>

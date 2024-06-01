@@ -12,7 +12,8 @@ class DetailReturController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('role:Petugas Gudang Retur');
+        $this->middleware('role:Petugas Gudang Retur')->except(['index']);
+        $this->middleware('role:Petugas Gudang Retur|Manager')->only(['index']);
     }
 
     /**
@@ -68,7 +69,7 @@ class DetailReturController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
 
-            return redirect()->back()->with('status', 'Gagal tambah data! '.$th->getMessage());
+            return redirect()->back()->with('status', 'Gagal tambah data! ' . $th->getMessage());
         }
     }
 

@@ -14,7 +14,9 @@ class SuratJalanController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('role:Petugas Gudang Hasil');
+        $this->middleware('role:Petugas Gudang Hasil')->except(['index']);
+        $this->middleware('role:Petugas Gudang Hasil|Manager')
+            ->only(['index']);
     }
 
     /**
@@ -82,7 +84,7 @@ class SuratJalanController extends Controller
         } catch (\Throwable $th) {
             DB::rollback();
 
-            return redirect()->back()->with('status', 'Surat jalan gagal dibuat! '.$th->getMessage());
+            return redirect()->back()->with('status', 'Surat jalan gagal dibuat! ' . $th->getMessage());
         }
     }
 

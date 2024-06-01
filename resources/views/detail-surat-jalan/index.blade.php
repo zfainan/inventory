@@ -6,12 +6,14 @@
     <p class="mb-0">Tanggal: {{ $suratJalan->tanggal }}</p>
     <p class="mb-0">Petugas: {{ $suratJalan->petugas->nama_petugas }}</p>
 
-    <div class="d-flex">
-        <div class="ms-auto">
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create">Tambah detail surat
-                jalan</button>
+    @if (auth()->user()->isPetugasGudangHasil)
+        <div class="d-flex">
+            <div class="ms-auto">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create">Tambah detail surat
+                    jalan</button>
+            </div>
         </div>
-    </div>
+    @endif
 
     @session('status')
         <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">

@@ -3,11 +3,13 @@
 @section('content')
     <h2 class="h4">Hasil Cetak</h2>
 
-    <div class="d-flex">
-        <div class="ms-auto">
-            <a href="{{ route('finished-goods.create') }}" class="btn btn-primary">Tambah hasil cetak</a>
+    @if (auth()->user()->isPetugasGudangHasil)
+        <div class="d-flex">
+            <div class="ms-auto">
+                <a href="{{ route('finished-goods.create') }}" class="btn btn-primary">Tambah hasil cetak</a>
+            </div>
         </div>
-    </div>
+    @endif
 
     @session('status')
         <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">

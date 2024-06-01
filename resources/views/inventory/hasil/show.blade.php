@@ -101,10 +101,13 @@
         <div class="card-body">
             <div class="d-flex">
                 <h4 class="my-auto">Riwayat Perubahan Stok</h4>
-                <div class="ms-auto">
-                    <a href="javascript:;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add">Pengurangan
-                        stok</a>
-                </div>
+                @if (auth()->user()->isPetugasGudangHasil)
+                    <div class="ms-auto">
+                        <a href="javascript:;" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#add">Pengurangan
+                            stok</a>
+                    </div>
+                @endif
             </div>
 
             <table class="table mt-4">

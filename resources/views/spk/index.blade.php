@@ -3,11 +3,13 @@
 @section('content')
     <h2 class="h4">Data SPK</h2>
 
-    <div class="d-flex">
-        <div class="ms-auto">
-            <a href="{{ route('spk.create') }}" class="btn btn-primary">Input SPK</a>
+    @if (auth()->user()->isPetugasGudangHasil)
+        <div class="d-flex">
+            <div class="ms-auto">
+                <a href="{{ route('spk.create') }}" class="btn btn-primary">Input SPK</a>
+            </div>
         </div>
-    </div>
+    @endif
 
     @session('status')
         <div class="alert alert-warning alert-dismissible fade show my-4" role="alert">

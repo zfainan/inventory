@@ -11,7 +11,11 @@ class ReturController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('role:Petugas Gudang Retur');
+        $this->middleware('role:Petugas Gudang Retur')
+            ->except(['index']);
+
+        $this->middleware('role:Petugas Gudang Retur|Manager')
+            ->only(['index']);
     }
 
     /**
@@ -58,7 +62,7 @@ class ReturController extends Controller
 
             return redirect(route('retur.index'))->with('status', 'Berhasil simpan data!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Gagal simpan data! '.$th->getMessage());
+            return redirect()->back()->with('status', 'Gagal simpan data! ' . $th->getMessage());
         }
     }
 

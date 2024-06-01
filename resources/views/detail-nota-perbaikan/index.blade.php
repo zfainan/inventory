@@ -7,11 +7,14 @@
     <p class="mb-0">Tanggal: {{ $notaPerbaikan->tanggal }}</p>
     <p class="mb-0">Petugas: {{ $notaPerbaikan->petugas->nama_petugas }}</p>
 
-    <div class="d-flex">
-        <div class="ms-auto">
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create">Tambah detail nota perbaikan</button>
+    @if (auth()->user()->isPetugasGudangRetur)
+        <div class="d-flex">
+            <div class="ms-auto">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create">Tambah detail nota
+                    perbaikan</button>
+            </div>
         </div>
-    </div>
+    @endif
 
     @session('status')
         <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
@@ -85,7 +88,8 @@
                         <select class="form-select" name="id_detail_retur" id="input-dr" required>
                             <option selected disabled>Pilih detail retur</option>
                             @foreach ($detailRetur as $itemDr)
-                                <option value="{{ $itemDr->id }}">{{ $itemDr->id }} - {{ $itemDr->buku->judul }} - {{ $itemDr->qty }} pcs
+                                <option value="{{ $itemDr->id }}">{{ $itemDr->id }} - {{ $itemDr->buku->judul }} -
+                                    {{ $itemDr->qty }} pcs
                                 </option>
                             @endforeach
                         </select>
