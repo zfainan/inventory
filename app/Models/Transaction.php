@@ -27,8 +27,7 @@ class Transaction extends Model
 
         static::updating(function (self $transaction) {
             if ($transaction->isDirty('qty')) {
-                $currentInventoryStock = $transaction->inventory->stok;
-                $beforeTransactionStock = $currentInventoryStock - ($transaction->getOriginal('qty'));
+                $beforeTransactionStock = $transaction->inventory->stok - ($transaction->getOriginal('qty'));
 
                 $transaction->inventory->update([
                     'stok' => $beforeTransactionStock + $transaction->qty,
