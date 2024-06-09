@@ -67,10 +67,13 @@ class InventoryGudangHasilController extends Controller
             ->select('id_spk', DB::raw('SUM(qty) as jumlah_hasil'))
             ->get();
 
+        $returStok = Inventory::gudangRetur()->where('id_buku', $inventoryHasil->id_buku)->sum('stok');
+
         return view('inventory.hasil.show', [
             'spk' => $spk,
             'data' => $data,
             'inventory' => $inventoryHasil,
+            'returStok' => $returStok,
         ]);
     }
 

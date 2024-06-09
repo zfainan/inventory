@@ -15,8 +15,16 @@
         <div class="col-md-4 my-2 px-2">
             <div class="card">
                 <div class="card-body">
-                    <h5>Total Stok Saat Ini</h5>
+                    <h5>Total Stok Gudang Hasil</h5>
                     <span>{{ $inventory->stok }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 my-2 px-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5>Total Stok Gudang Retur</h5>
+                    <span>{{ $returStok }}</span>
                 </div>
             </div>
         </div>
