@@ -18,9 +18,15 @@ class InventoryGudangReturController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Inventory::gudangRetur()->with('buku')->latest()->paginate();
+        $keyword = $request->get('keyword');
+
+        $data = Inventory::gudangRetur()
+            ->with('buku')
+            ->filterByKeyword($keyword)
+            ->latest()
+            ->paginate();
 
         return view('inventory.retur.index', [
             'data' => $data,

@@ -45,4 +45,15 @@ class Inventory extends Model
     {
         return $this->belongsTo(Buku::class, 'id_buku');
     }
+
+    public function scopeFilterByKeyword($query, $keyword)
+    {
+        if ($keyword) {
+            $query->whereHas('buku', function ($queryBuku) use ($keyword) {
+                $queryBuku->where('judul', 'like', "%$keyword%");
+            });
+        }
+
+        return $query;
+    }
 }

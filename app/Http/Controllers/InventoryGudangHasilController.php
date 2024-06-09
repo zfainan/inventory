@@ -20,9 +20,15 @@ class InventoryGudangHasilController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Inventory::gudangHasil()->with('buku')->latest()->paginate();
+        $keyword = $request->get('keyword');
+
+        $data = Inventory::gudangHasil()
+            ->with('buku')
+            ->filterByKeyword($keyword)
+            ->latest()
+            ->paginate();
 
         return view('inventory.hasil.index', [
             'data' => $data,
