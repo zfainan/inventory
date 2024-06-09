@@ -10,6 +10,8 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
+        <link rel="icon" href="/img/logo.png">
+
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
@@ -44,11 +46,11 @@
                             </button>
                         </div>
                         <div>
-                            <a class="navbar-brand brand-logo" href="index.html">
-                                <img src="/assets/images/logo.svg" alt="logo" />
+                            <a class="navbar-brand brand-logo" href="/">
+                                CV. Galaxy Media Ilmu
                             </a>
-                            <a class="navbar-brand brand-logo-mini" href="index.html">
-                                <img src="/assets/images/logo-mini.svg" alt="logo" />
+                            <a class="navbar-brand brand-logo-mini" href="/">
+                                CV. Galaxy Media Ilmu
                             </a>
                         </div>
                     </div>
