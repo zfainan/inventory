@@ -18,7 +18,6 @@ class UkuranBukuController extends Controller
      */
     public function index()
     {
-
         $data = UkuranBuku::latest()->paginate();
 
         return view('ukuran-buku.index', [
@@ -50,7 +49,7 @@ class UkuranBukuController extends Controller
 
             return redirect(route('ukuran-buku.index'))->with('status', 'Berhasil simpan data!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Gagal simpan data! '.$th->getMessage());
+            return redirect()->back()->with('status', 'Gagal simpan data! ' . $th->getMessage());
         }
     }
 
@@ -75,7 +74,19 @@ class UkuranBukuController extends Controller
      */
     public function update(Request $request, UkuranBuku $ukuranBuku)
     {
-        //
+        $request->validate([
+            'ukuran_buku' => 'required',
+        ]);
+
+        try {
+            $ukuranBuku->fill([
+                'ukuran_buku' => $request->ukuran_buku,
+            ])->save();
+
+            return redirect(route('ukuran-buku.index'))->with('status', 'Berhasil ubah data!');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('status', 'Gagal ubah data! ' . $th->getMessage());
+        }
     }
 
     /**
@@ -92,7 +103,7 @@ class UkuranBukuController extends Controller
 
             return redirect(route('ukuran-buku.index'))->with('status', 'Berhasil hapus data!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Gagal hapus data! '.$th->getMessage());
+            return redirect()->back()->with('status', 'Gagal hapus data! ' . $th->getMessage());
         }
     }
 }
