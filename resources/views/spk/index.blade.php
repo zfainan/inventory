@@ -81,8 +81,14 @@
                                         <a href="{{ route('spk.edit', $spk) }}"><span
                                                 class="badge text-bg-warning rounded-1"><i
                                                     class="menu-icon mdi mdi-pen"></i></span></a>
-                                        {{-- <a href="#"><span class="badge text-bg-danger rounded-1 ms-2"><i
-                                                class="menu-icon mdi mdi-delete-forever"></i></span></a> --}}
+                                        <button onclick="updateModalDelete({{ $spk->toJson() }})"
+                                            onkeypress="updateModalDelete({{ $spk->toJson() }})"
+                                            class="m-0 ms-2 border-0 p-0">
+                                            <span class="badge text-bg-danger rounded-1" data-bs-toggle="modal"
+                                                data-bs-target="#deleteSpk">
+                                                <i class="menu-icon mdi mdi-delete-forever"></i>
+                                            </span>
+                                        </button>
                                     @endif
                                 </td>
                             </tr>
@@ -108,4 +114,39 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Hapus Ukuran Buku -->
+    <div class="modal fade" id="deleteSpk" tabindex="-1" aria-labelledby="deleteSpkLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="deleteSpkLabel">Hapus
+                        SPK
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Anda yakin akan menghapus <span id="nomorSpk"></span>?
+                </div>
+                <div class="modal-footer">
+                    <form method="POST" id="deleteSpkForm">
+                        @csrf
+                        @method('DELETE')
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger">Hapus</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const txtNomorSpk = document.getElementById('nomorSpk');
+        const deleteForm = document.getElementById('deleteSpkForm');
+
+        function updateModalDelete(spk) {
+            txtNomorSpk.innerText = spk.nomor_spk
+            deleteForm.action = `/spk/${spk.id}`
+        }
+    </script>
 @endsection

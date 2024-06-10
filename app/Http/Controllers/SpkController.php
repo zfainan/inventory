@@ -164,6 +164,20 @@ class SpkController extends Controller
      */
     public function destroy(Spk $spk)
     {
-        //
+        try {
+            if (count($spk->detailSpk) > 0) {
+                throw new LogicException(
+                    sprintf('SPK %s telah memiliki hasil cetak.', $spk->nomor_spk)
+                );
+            }
+
+            $spk->delete();
+
+            return redirect(route('spk.index'))->with('status', 'Hapus data SPK berhasil!');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+
+            return redirect()->back()->with('status', 'Hapus data SPK gagal! ' . $th->getMessage());
+        }
     }
 }

@@ -69,7 +69,15 @@ class PenerbitController extends Controller
      */
     public function update(Request $request, Penerbit $penerbit)
     {
-        //
+        $request->validate([
+            'penerbit' => 'required',
+        ]);
+
+        $penerbit->fill([
+            'penerbit' => $request->penerbit,
+        ])->save();
+
+        return redirect(route('penerbit.index'))->with('status', 'Berhasil ubah data penerbit!');
     }
 
     /**
@@ -77,6 +85,13 @@ class PenerbitController extends Controller
      */
     public function destroy(Penerbit $penerbit)
     {
-        //
+        try {
+            $penerbit->delete();
+
+            return redirect(route('penerbit.index'))->with('status', 'Hapus data penerbit berhasil!');
+        } catch (\Throwable $th) {
+
+            return redirect()->back()->with('status', 'Hapus data penerbit gagal! ' . $th->getMessage());
+        }
     }
 }
