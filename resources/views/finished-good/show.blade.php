@@ -21,7 +21,7 @@
     <div class="card mt-4">
         <div class="card-body">
             <form class="row">
-                <div class="col-12 col-xl-6 mb-3 ms-auto d-flex">
+                <div class="col-12 col-xl-6 d-flex mb-3 ms-auto">
                     <div class="col-4 ms-3 ms-auto">
                         <input type="date" name="since" class="form-control" value="{{ request()->input('since') }}">
                     </div>
@@ -60,16 +60,17 @@
                                     <a href="{{ route('finished-goods.edit', $fg) }}"><span
                                             class="badge text-bg-warning rounded-1 ms-2"><i
                                                 class="menu-icon mdi mdi-pen"></i></span></a>
-                                    <a href="#"><span class="badge text-bg-danger rounded-1 ms-2"><i
-                                                class="menu-icon mdi mdi-delete-forever"></i></span></a>
+                                    {{-- <a href="#"><span class="badge text-bg-danger rounded-1 ms-2"><i
+                                                class="menu-icon mdi mdi-delete-forever"></i></span></a> --}}
                                 @endif
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+
+            {{ $data->links() }}
         </div>
     </div>
 
-    {{ $data->links() }}
 @endsection
