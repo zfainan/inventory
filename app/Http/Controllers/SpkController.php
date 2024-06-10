@@ -94,7 +94,7 @@ class SpkController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
 
-            return redirect()->back()->with('status', 'Input data SPK gagal! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Input data SPK gagal! '.$th->getMessage());
         }
     }
 
@@ -155,7 +155,7 @@ class SpkController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
 
-            return redirect()->back()->with('status', 'Ubah data SPK gagal! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Ubah data SPK gagal! '.$th->getMessage());
         }
     }
 
@@ -177,7 +177,7 @@ class SpkController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
 
-            return redirect()->back()->with('status', 'Hapus data SPK gagal! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Hapus data SPK gagal! '.$th->getMessage());
         }
     }
 }

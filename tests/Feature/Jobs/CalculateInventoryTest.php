@@ -49,7 +49,7 @@ it('can calculate stock when finished goods updated', function () {
     $qty = random_int(50, 60);
     $qty2 = random_int(30, 49);
     $detailSpk = DetailSpk::factory()->create([
-        'qty' => $qty
+        'qty' => $qty,
     ]);
     $detailSpk2 = DetailSpk::factory()->create([
         'id_spk' => $detailSpk->id_spk,
@@ -116,7 +116,7 @@ it('can\'t update finished goods qty when stock below qty', function () {
     // Arrange
     $qty = random_int(50, 60);
     $detailSpk = DetailSpk::factory()->create([
-        'qty' => $qty
+        'qty' => $qty,
     ]);
 
     $inventory = Inventory::gudangHasil()->where('id_buku', $detailSpk->id_buku)->first();
@@ -137,7 +137,7 @@ it('can\'t update finished goods qty when stock below qty', function () {
 
     // arrange
     $inventory->update([
-        'stok' => 0
+        'stok' => 0,
     ]);
     $detailSpk->qty = $qty - 100; // inventory minus
 

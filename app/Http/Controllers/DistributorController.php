@@ -98,7 +98,7 @@ class DistributorController extends Controller
             return redirect(route('distributor.index'))->with('status', 'Hapus data distributor berhasil!');
         } catch (\Throwable $th) {
 
-            return redirect()->back()->with('status', 'Hapus data distributor gagal! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Hapus data distributor gagal! '.$th->getMessage());
         }
     }
 }

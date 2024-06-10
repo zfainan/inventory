@@ -91,7 +91,7 @@ class PenerbitController extends Controller
             return redirect(route('penerbit.index'))->with('status', 'Hapus data penerbit berhasil!');
         } catch (\Throwable $th) {
 
-            return redirect()->back()->with('status', 'Hapus data penerbit gagal! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Hapus data penerbit gagal! '.$th->getMessage());
         }
     }
 }

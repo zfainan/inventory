@@ -83,7 +83,7 @@ class FinishedGoodController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
 
-            return redirect()->back()->with('status', 'Input data gagal! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Input data gagal! '.$th->getMessage());
         }
     }
 
@@ -154,7 +154,7 @@ class FinishedGoodController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
 
-            return redirect()->back()->with('status', 'Ubah data gagal! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Ubah data gagal! '.$th->getMessage());
         }
     }
 

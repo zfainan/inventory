@@ -49,7 +49,7 @@ class UkuranBukuController extends Controller
 
             return redirect(route('ukuran-buku.index'))->with('status', 'Berhasil simpan data!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Gagal simpan data! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Gagal simpan data! '.$th->getMessage());
         }
     }
 
@@ -85,7 +85,7 @@ class UkuranBukuController extends Controller
 
             return redirect(route('ukuran-buku.index'))->with('status', 'Berhasil ubah data!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Gagal ubah data! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Gagal ubah data! '.$th->getMessage());
         }
     }
 
@@ -103,7 +103,7 @@ class UkuranBukuController extends Controller
 
             return redirect(route('ukuran-buku.index'))->with('status', 'Berhasil hapus data!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Gagal hapus data! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Gagal hapus data! '.$th->getMessage());
         }
     }
 }

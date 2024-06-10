@@ -27,7 +27,7 @@ class UpdateFinishedGoodTransaction implements ShouldQueue
     public function handle(): void
     {
         $this->detailSpk->transaction->update([
-            'qty' => $this->detailSpk->qty
+            'qty' => $this->detailSpk->qty,
         ]);
     }
 }

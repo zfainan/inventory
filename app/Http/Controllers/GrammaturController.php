@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Grammatur;
-use LogicException;
 use Illuminate\Http\Request;
+use LogicException;
 
 class GrammaturController extends Controller
 {
@@ -49,7 +49,7 @@ class GrammaturController extends Controller
 
             return redirect(route('grammatur.index'))->with('status', 'Berhasil simpan data!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Gagal simpan data! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Gagal simpan data! '.$th->getMessage());
         }
     }
 
@@ -85,7 +85,7 @@ class GrammaturController extends Controller
 
             return redirect(route('grammatur.index'))->with('status', 'Berhasil ubah data!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Gagal ubah data! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Gagal ubah data! '.$th->getMessage());
         }
     }
 
@@ -103,7 +103,7 @@ class GrammaturController extends Controller
 
             return redirect(route('grammatur.index'))->with('status', 'Berhasil hapus data!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Gagal hapus data! ' . $th->getMessage());
+            return redirect()->back()->with('status', 'Gagal hapus data! '.$th->getMessage());
         }
     }
 }

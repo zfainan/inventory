@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\CetakIsi;
-use LogicException;
 use Illuminate\Http\Request;
+use LogicException;
 
 class CetakIsiController extends Controller
 {

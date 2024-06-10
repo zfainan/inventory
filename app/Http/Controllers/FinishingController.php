@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Finishing;
-use LogicException;
 use Illuminate\Http\Request;
+use LogicException;
 
 class FinishingController extends Controller
 {
