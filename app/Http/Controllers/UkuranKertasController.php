@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Grammatur;
 use App\Models\KertasIsi;
 use App\Models\UkuranKertas;
-use Exception;
+use LogicException;
 use Illuminate\Http\Request;
 
 class UkuranKertasController extends Controller
@@ -59,7 +59,7 @@ class UkuranKertasController extends Controller
 
             return redirect(route('ukuran-kertas.index'))->with('status', 'Berhasil simpan data!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Gagal simpan data! '.$th->getMessage());
+            return redirect()->back()->with('status', 'Gagal simpan data! ' . $th->getMessage());
         }
     }
 
@@ -84,7 +84,23 @@ class UkuranKertasController extends Controller
      */
     public function update(Request $request, UkuranKertas $ukuranKertas)
     {
-        //
+        $request->validate([
+            'id_grammatur' => 'required|exists:grammatur,id',
+            'id_kertas_isi' => 'required|exists:kertas_isi,id',
+            'ukuran' => 'required',
+        ]);
+
+        try {
+            $ukuranKertas->fill([
+                'id_grammatur' => $request->id_grammatur,
+                'id_kertas_isi' => $request->id_kertas_isi,
+                'ukuran' => $request->ukuran,
+            ])->save();
+
+            return redirect(route('ukuran-kertas.index'))->with('status', 'Berhasil ubah data!');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('status', 'Gagal ubah data! ' . $th->getMessage());
+        }
     }
 
     /**
@@ -94,14 +110,14 @@ class UkuranKertasController extends Controller
     {
         try {
             if (count($ukuranKertas->detailMaterial) > 0) {
-                throw new Exception("Terdapat detail material dengan ukuran kertas {$ukuranKertas->ukuran}."); // NOSONAR
+                throw new LogicException("Terdapat detail material dengan ukuran kertas {$ukuranKertas->ukuran}.");
             }
 
             $ukuranKertas->delete();
 
             return redirect(route('ukuran-kertas.index'))->with('status', 'Berhasil hapus data!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Gagal hapus data! '.$th->getMessage());
+            return redirect()->back()->with('status', 'Gagal hapus data! ' . $th->getMessage());
         }
     }
 }
