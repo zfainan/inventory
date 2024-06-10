@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Grammatur;
-use Exception;
+use LogicException;
 use Illuminate\Http\Request;
 
 class GrammaturController extends Controller
@@ -49,7 +49,7 @@ class GrammaturController extends Controller
 
             return redirect(route('grammatur.index'))->with('status', 'Berhasil simpan data!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Gagal simpan data! '.$th->getMessage());
+            return redirect()->back()->with('status', 'Gagal simpan data! ' . $th->getMessage());
         }
     }
 
@@ -74,7 +74,19 @@ class GrammaturController extends Controller
      */
     public function update(Request $request, Grammatur $grammatur)
     {
-        //
+        $request->validate([
+            'grammatur' => 'required',
+        ]);
+
+        try {
+            $grammatur->fill([
+                'grammatur' => $request->grammatur,
+            ])->save();
+
+            return redirect(route('grammatur.index'))->with('status', 'Berhasil ubah data!');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('status', 'Gagal ubah data! ' . $th->getMessage());
+        }
     }
 
     /**
@@ -84,14 +96,14 @@ class GrammaturController extends Controller
     {
         try {
             if (count($grammatur->ukuranKertas) > 0) {
-                throw new Exception("Terdapat ukuran kertas dengan grammatur {$grammatur->grammatur} gram."); // NOSONAR
+                throw new LogicException("Terdapat ukuran kertas dengan grammatur {$grammatur->grammatur} gram.");
             }
 
             $grammatur->delete();
 
             return redirect(route('grammatur.index'))->with('status', 'Berhasil hapus data!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Gagal hapus data! '.$th->getMessage());
+            return redirect()->back()->with('status', 'Gagal hapus data! ' . $th->getMessage());
         }
     }
 }
