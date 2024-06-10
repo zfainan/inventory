@@ -42,6 +42,11 @@ class Buku extends Model
         return $this->HasMany(Inventory::class, 'id_buku', 'id');
     }
 
+    public function spk(): HasMany
+    {
+        return $this->HasMany(Spk::class, 'id_buku', 'id');
+    }
+
     public function detailMaterial(): HasOne
     {
         return $this->hasOne(DetailMaterial::class, 'id_buku');
