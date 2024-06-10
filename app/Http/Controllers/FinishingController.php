@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Finishing;
-use Exception;
+use LogicException;
 use Illuminate\Http\Request;
 
 class FinishingController extends Controller
@@ -74,7 +74,19 @@ class FinishingController extends Controller
      */
     public function update(Request $request, Finishing $finishing)
     {
-        //
+        $request->validate([
+            'finishing' => 'required',
+        ]);
+
+        try {
+            $finishing->fill([
+                'finishing' => $request->finishing,
+            ])->save();
+
+            return redirect(route('finishing.index'))->with('status', 'Berhasil simpan data!');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('status', 'Gagal simpan data! '.$th->getMessage());
+        }
     }
 
     /**
@@ -84,7 +96,7 @@ class FinishingController extends Controller
     {
         try {
             if (count($finishing->detailMaterial) > 0) {
-                throw new Exception("Terdapat detail material dengan finishing {$finishing->cetak_isi}."); // NOSONAR
+                throw new LogicException("Terdapat detail material dengan finishing {$finishing->cetak_isi}.");
             }
 
             $finishing->delete();
