@@ -74,7 +74,19 @@ class KertasIsiController extends Controller
      */
     public function update(Request $request, KertasIsi $kertasIsi)
     {
-        //
+        $request->validate([
+            'kertas_isi' => 'required',
+        ]);
+
+        try {
+            $kertasIsi->fill([
+                'kertas_isi' => $request->kertas_isi,
+            ])->save();
+
+            return redirect(route('kertas-isi.index'))->with('status', 'Berhasil simpan data!');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('status', 'Gagal simpan data! '.$th->getMessage());
+        }
     }
 
     /**
