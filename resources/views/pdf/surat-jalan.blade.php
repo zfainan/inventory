@@ -24,11 +24,42 @@
                 margin: 0;
                 padding: 8px 10px;
             }
+
+            .company-details {
+                margin: auto;
+            }
+
+            .company-details h1 {
+                margin: 0;
+                font-size: 24px;
+                text-align: center;
+            }
+
+            .company-details p {
+                margin: 5px 0;
+                text-align: center;
+            }
         </style>
     </head>
 
     <body>
-        <h2 style="text-align: center">Surat Jalan</h2>
+        <table style="width: 100%">
+            <tr>
+                <td>
+                    <img src="{{ public_path('img/logo.png') }}" alt="Logo CV. Galaxy Media Ilmu" width="90">
+                </td>
+                <td class="company-details">
+                    <h1>CV. Galaxy Media Ilmu</h1>
+                    <p>Tlogo, RT.2/RW.2, Ambarketawang, Kec. Gamping, Kabupaten Sleman</p>
+                    {{-- <p>Telepon: (021) 123-4567 | Email: info@galaxymediailmu.com</p> --}}
+                    <p>Website: inventory.celyverse.com</p>
+                </td>
+            </tr>
+        </table>
+
+        <hr>
+
+        <h3>Surat Jalan</h3>
 
         <table class="table">
             <tr>
@@ -45,7 +76,10 @@
 
         <br>
 
-        <table class="table table-border">
+        <p>Dengan hormat,</p>
+        <p>Berikut ini adalah rincian barang yang dikirim:</p>
+
+        <table class="table-border table">
             <thead>
                 <tr>
                     <th>Distributor</th>
