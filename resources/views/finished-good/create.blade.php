@@ -18,7 +18,7 @@
                 <div class="mb-3">
                     <label for="input-spk" class="form-label">SPK</label><span class="text-danger">*</span>
                     <select class="form-select" name="id_spk" id="input-spk" required onchange="updateBook()">
-                        <option selected disabled>Pilih SPK</option>
+                        <option selected disabled value>Pilih SPK</option>
                         @foreach ($spk as $item)
                             <option value="{{ $item->id }}" data-buku="{{ $item->buku }}">{{ $item->nomor_spk }} -
                                 {{ $item->buku->judul }}</option>

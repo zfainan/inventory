@@ -7,6 +7,7 @@ use App\Models\DetailSpk;
 use App\Models\Spk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use LogicException;
 
 class FinishedGoodController extends Controller
 {
@@ -56,7 +57,7 @@ class FinishedGoodController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_spk' => 'exists:spk,id',
+            'id_spk' => 'required|exists:spk,id',
             'tanggal' => 'required|date',
             'qty' => 'required|numeric|min:0',
         ]);
@@ -66,6 +67,15 @@ class FinishedGoodController extends Controller
 
             $spk = Spk::findOrFail($request->id_spk);
             $stok = $spk->detailSpk?->sum('stok');
+            $totalFg = $spk->detailSpk?->sum('qty');
+
+            if (($totalFg + $request->qty) > $spk->oplah_insheet) {
+                throw new LogicException('Hasil cetak tidak boleh melebihi oplah.');
+            }
+
+            if ($request->tanggal > $spk->tanggal_keluar || $request->tanggal < $spk->tanggal_masuk) {
+                throw new LogicException('Tidak bisa menambah barang jadi pada diluar tanggal masuk dan tanggal keluar SPK.');
+            }
 
             $detailSpk = new DetailSpk();
             $detailSpk->fill([
@@ -83,7 +93,7 @@ class FinishedGoodController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
 
-            return redirect()->back()->with('status', 'Input data gagal! '.$th->getMessage());
+            return redirect()->back()->with('status', 'Input data gagal! ' . $th->getMessage());
         }
     }
 
@@ -154,7 +164,7 @@ class FinishedGoodController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
 
-            return redirect()->back()->with('status', 'Ubah data gagal! '.$th->getMessage());
+            return redirect()->back()->with('status', 'Ubah data gagal! ' . $th->getMessage());
         }
     }
 

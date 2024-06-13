@@ -63,7 +63,8 @@
                             <th scope="col">Tanggal Masuk</th>
                             <th scope="col">Tanggal Keluar</th>
                             <th scope="col">Buku</th>
-                            <th scope="col">Jumlah Cetak (Oplah Dasar + insheet)</th>
+                            <th scope="col">Oplah</th>
+                            <th scope="col">Jumlah Barang Jadi</th>
                             <th scope="col" class="text-center">Aksi</th>
                         </tr>
                     </thead>
@@ -76,6 +77,7 @@
                                 <td>{{ $spk->tanggal_keluar }}</td>
                                 <td>{{ $spk->buku?->judul }}</td>
                                 <td>{{ $spk->oplah_insheet }}</td>
+                                <td>{{ $spk->total_barang_jadi }}</td>
                                 <td class="text-center">
                                     @if (auth()->user()->isPetugasGudangHasil)
                                         <a href="{{ route('spk.edit', $spk) }}"><span

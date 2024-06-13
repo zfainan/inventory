@@ -27,7 +27,7 @@ class SpkController extends Controller
             'keyword' => 'nullable',
         ]);
 
-        $query = Spk::with(['buku.penerbit']);
+        $query = Spk::with(['buku.penerbit', 'detailSpk']);
 
         if ($request->filled('since') && $request->filled('until')) {
             $query->whereBetween('tanggal_masuk', [
@@ -44,7 +44,7 @@ class SpkController extends Controller
                 ->orWhere('nomor_spk', 'like', "%$keyword%");
         }
 
-        $data = $query->latest()->paginate();
+        $data = $query->latest()->paginate()->appends('total_barang_jadi');
 
         return view('spk.index', [
             'data' => $data,
