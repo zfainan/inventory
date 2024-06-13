@@ -90,21 +90,6 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="input-petugas" class="form-label">Petugas</label><span class="text-danger">*</span>
-                        <select class="form-select" name="id_petugas" id="input-petugas" required>
-                            <option selected disabled>Pilih petugas</option>
-                            @foreach ($petugas as $itemPetugas)
-                                <option value="{{ $itemPetugas->id }}">{{ $itemPetugas->nama_petugas }}
-                                </option>
-                            @endforeach
-                        </select>
-
-                        @error('id_petugas')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="mb-3">
                         <label for="input-tanggal" class="form-label">Tanggal</label><span class="text-danger">*</span>
                         <input type="date" name="tanggal" class="form-control" id="input-tanggal" required>
                     </div>

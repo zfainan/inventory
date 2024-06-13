@@ -25,12 +25,10 @@ class ReturController extends Controller
     {
         $data = Retur::with(['petugas', 'distributor'])->latest()->paginate();
         $distributor = Distributor::latest()->get();
-        $petugas = Petugas::latest()->get();
 
         return view('retur.index', [
             'data' => $data,
             'distributor' => $distributor,
-            'petugas' => $petugas,
         ]);
     }
 
@@ -49,20 +47,22 @@ class ReturController extends Controller
     {
         $request->validate([
             'id_distributor' => 'required',
-            'id_petugas' => 'required',
             'tanggal' => 'required|date',
         ]);
+
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
 
         try {
             Retur::create([
                 'id_distributor' => $request->id_distributor,
-                'id_petugas' => $request->id_petugas,
+                'id_petugas' => $user->petugas->id,
                 'tanggal' => $request->tanggal,
             ]);
 
             return redirect(route('retur.index'))->with('status', 'Berhasil simpan data!');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('status', 'Gagal simpan data! '.$th->getMessage());
+            return redirect()->back()->with('status', 'Gagal simpan data! ' . $th->getMessage());
         }
     }
 
